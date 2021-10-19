@@ -1,9 +1,9 @@
 <template>
-  <div class="principal">
+  <div >
     <h1>{{ titulo }}</h1>
 
-    <div class="proyect">
-      <div class="text">
+    <div >
+      <div >
         Titulo Proyecto
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa saepe
@@ -20,7 +20,7 @@
           dolores.
         </p>
       </div>
-      <div class="text">Creador
+      <div >Creador
           <p>
           Efesto
         </p>
