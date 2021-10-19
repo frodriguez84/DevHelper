@@ -2,6 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Bienvenidos a DevHelper"/>
+    <h2>La solucion a tus proyectos</h2>
     <h3>{{ titulo }}</h3>
     <button @click="suma">+1</button>
     <h1>{{ num }}</h1>

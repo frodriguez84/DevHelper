@@ -3,48 +3,52 @@
     <h1>Pagina de LogIn</h1>
 
     <div>
-        <h2>Nombre de Usuario</h2>
-        <input type="text">
+      <h2>DNI</h2>
+      <input type="text" />
     </div>
     <div>
-        <h2>DNI</h2>
-        <input type="text">
+      <h2>Constraseña</h2>
+      <input type="text" />
     </div>
-    <br>
+    <br />
     <div>
-        <button >Ingresar</button>
-    <br>
-    <br>
-        <button @click="suma">Prueba +1 en LogIn</button>
-        <h2>{{ num }}</h2>
+      <button>Ingresar</button>
+      <br />
+      <br />
+      <div>
+        <h2>Crear cuenta</h2>
+        <button>Registrarse</button>
+      </div>
+      <br />
+      <br />
+      <button @click="suma">Prueba +1 en LogIn</button>
+      <h2>{{ num }}</h2>
     </div>
-
-
   </div>
 </template>
 
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'LogIn',
+  name: "LogIn",
   components: {
-    HelloWorld
+    HelloWorld,
   },
 
-  data(){
-    return{
+  data() {
+    return {
       titulo: "Prueba de Data",
       num: 0,
-    }
+    };
   },
 
-  methods:{
-    suma(){
-      this.num++
-    }
-  }
-}
+  methods: {
+    suma() {
+      this.num++;
+    },
+  },
+};
 </script>
