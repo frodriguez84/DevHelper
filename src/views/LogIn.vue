@@ -17,7 +17,11 @@
       <br />
       <div>
         <h2>Crear cuenta</h2>
-        <button>Registrarse</button>
+        <router-link to="/registro">
+          <button>Registrarse</button>
+          
+
+        </router-link>
       </div>
       <br />
       <br />
@@ -42,6 +46,7 @@ export default {
     return {
       titulo: "Prueba de Data",
       num: 0,
+      
     };
   },
 
@@ -49,6 +54,7 @@ export default {
     suma() {
       this.num++;
     },
+    
   },
 };
 </script>
