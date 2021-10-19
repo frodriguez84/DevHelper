@@ -7,8 +7,10 @@
       <router-link to="/principal">Principal</router-link> |
     </div>
     <router-view/>
+    <my-footer></my-footer>
   </div>
 </template>
+
 
 <style>
 #app {

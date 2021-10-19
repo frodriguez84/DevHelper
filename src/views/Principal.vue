@@ -7,17 +7,18 @@
       <div class="text">Descripcion</div>
       <div class="text">Creador</div>
 
-      <div>
-        <button class="btn">Ver</button>
+    </div>
+    <div>
+        <button>Ver</button>
       </div>
 
       <div>
-        <button class="btn">Dev</button>
+        <button >Dev</button>
       </div>
       <div>
-        <button class="btn">Patrocinador</button>
+        <button >Patrocinador</button>
       </div>
-    </div>
+      
     <br />
     <hr />
 
@@ -51,41 +52,3 @@ export default {
 };
 </script>
 
-<style>
-.proyect {
-  background-color: darkgray;
-  padding: 3%;
-  margin-left: 35%;
-  margin-right: 35%;
-  text-align: left;
-}
-.btn {
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-  float: left;
-}
-.out {
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-  float: right;
-  padding: 0.5%;
-  margin-left: 15%;
-  margin-right: 35%;
-}
-.tienda {
-  text-align: center;
-  text-decoration: none;
-  font-size: 15px;
-  cursor: pointer;
-  float: left;
-  padding: 0.5%;
-  margin-left: 35%;
-  margin-right: 15%;
-}
-
-</style>

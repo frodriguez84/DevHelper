@@ -25,6 +25,10 @@
       </div>
       <br />
       <br />
+      <br />
+      <br />
+      <br />
+      <br />  
       <button @click="suma">Prueba +1 en LogIn</button>
       <h2>{{ num }}</h2>
     </div>

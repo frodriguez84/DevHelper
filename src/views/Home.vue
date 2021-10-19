@@ -2,7 +2,7 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Bienvenidos a DevHelper"/>
-    <h2>La solucion a tus proyectos</h2>
+    <h3>La solucion a tus proyectos</h3>
 
   <div>
     <router-link to="/login">
@@ -10,7 +10,7 @@
 </router-link>
   </div>
 
-    <h3>{{ titulo }}</h3>
+    <h4>{{ titulo }}</h4>
     <button @click="suma">+1</button>
     <h1>{{ num }}</h1>
   </div>
