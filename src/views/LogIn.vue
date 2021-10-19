@@ -12,16 +12,16 @@
     </div>
     <br />
     <div>
+      <router-link to="/principal">
       <button>Ingresar</button>
+      </router-link>
       <br />
       <br />
       <div>
         <h2>Crear cuenta</h2>
         <router-link to="/registro">
           <button>Registrarse</button>
-          
-
-        </router-link>
+          </router-link>
       </div>
       <br />
       <br />
@@ -46,6 +46,8 @@ export default {
     return {
       titulo: "Prueba de Data",
       num: 0,
+      dni: "123",
+      pass: "123",
       
     };
   },
@@ -54,6 +56,11 @@ export default {
     suma() {
       this.num++;
     },
+    validacion(){
+      if(this.dni === "123" && this.pass === "123"){
+        
+      }
+    }
     
   },
 };

@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Log In</router-link> |
       <router-link to="/registro">Registro</router-link> |
+      <router-link to="/principal">Principal</router-link> |
     </div>
     <router-view/>
   </div>

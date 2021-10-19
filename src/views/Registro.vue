@@ -21,9 +21,7 @@
     <br />
     <br />
     <div>
-      <button @click="registro">Registrarse
-        
-      </button>
+      <button @click="registro">Registrarse</button>
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
 
   data() {
     return {
-      mensaje: "Se envio un mail a su casilla de correo",
+      mensaje: "Se envio un mail a su casilla de correo. Ingrese sus crendenciales en la pantalla de login",
     };
   },
 
