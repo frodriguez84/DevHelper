@@ -12,23 +12,20 @@
     </div>
     <br />
     <div>
-      <router-link to="/principal">
-      <button>Ingresar</button>
-      </router-link>
+      <button @click="principal">Ingresar</button>
+
       <br />
       <br />
       <div>
         <h2>Crear cuenta</h2>
-        <router-link to="/registro">
-          <button>Registrarse</button>
-          </router-link>
+        <button @click="registro">Registrarse</button>
       </div>
       <br />
       <br />
       <br />
       <br />
       <br />
-      <br />  
+      <br />
       <button @click="suma">Prueba +1 en LogIn</button>
       <h2>{{ num }}</h2>
     </div>
@@ -50,9 +47,6 @@ export default {
     return {
       titulo: "Prueba de Data",
       num: 0,
-      dni: "123",
-      pass: "123",
-      
     };
   },
 
@@ -60,12 +54,12 @@ export default {
     suma() {
       this.num++;
     },
-    validacion(){
-      if(this.dni === "123" && this.pass === "123"){
-        
-      }
-    }
-    
+    registro() {
+      this.$router.push("/registro");
+    },
+    principal() {
+      this.$router.push("/principal");
+    },
   },
 };
 </script>

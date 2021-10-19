@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Log In</router-link> |
@@ -7,7 +8,7 @@
       <router-link to="/principal">Principal</router-link> |
     </div>
     <router-view/>
-    <my-footer></my-footer>
+    
   </div>
 </template>
 
@@ -33,5 +34,5 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-</style>
+</style> 
 

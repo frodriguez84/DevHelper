@@ -7,19 +7,16 @@
     </div>
     <div>
       <h2>Constraseña</h2>
-      <input type="text" />
+      <input type="password" />
     </div>
     <div>
       <h2>Repetir Constraseña</h2>
-      <input type="text" />
+      <input type="password" />
     </div>
     <div>
       <h2>Email</h2>
-      <input type="text" />
-    </div>
-    <br />
-    <br />
-    <br />
+      <input type="email" />
+    </div><br /><br /><br />
     <div>
       <button @click="registro">Registrarse</button>
     </div>

@@ -5,9 +5,9 @@
     <h3>La solucion a tus proyectos</h3>
 
   <div>
-    <router-link to="/login">
-  <button id="myButton" class="foo bar">Logeate</button>
-</router-link>
+    
+  <button @click="login">Logeate</button>
+
   </div>
 
     <h4>{{ titulo }}</h4>
@@ -36,7 +36,10 @@ export default {
   methods:{
     suma(){
       this.num++
-    }
+    },
+    login(){
+      this.$router.push("/login")
+    },
   }
 }
 </script>
