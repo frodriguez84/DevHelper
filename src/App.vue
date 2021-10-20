@@ -6,6 +6,7 @@
       <router-link to="/login">Log In</router-link> |
       <router-link to="/registro">Registro</router-link> |
       <router-link to="/principal">Principal</router-link> |
+      <router-link to="/buscar">Buscar</router-link> |
     </div>
     <router-view/>
     
