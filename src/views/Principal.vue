@@ -30,6 +30,7 @@
         </thead>
         <tbody>
           <tr v-for="(p, index) in proyectos" :key="index">
+            
             <td>
               <span :class="{ finalizado: p.estado === 'finalizado' }">{{
                 firstCharUpper(p.nombre)}}</span>

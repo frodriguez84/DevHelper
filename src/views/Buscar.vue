@@ -2,7 +2,7 @@
   <div class="container">
     <h1>{{ titulo }}</h1>
     <div class="d-flex">
-      <div><input type="text" /><button>Buscar</button></div>
+      <div><input type="text" /><button @click="buscar">Buscar</button></div>
 
       <div class="check">
         <p>Buscar por genero</p>
@@ -22,20 +22,20 @@
     <div id="carouselExampleControls" class="pos" data-ride="carousel" >
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="First slide"/>
+          <img class="d-block w-100" src="../img/Monkey.jpg" alt=""/>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="Second slide"/>
+          <img class="d-block w-100" src="../img/Monkey.jpg" alt=""/>
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="Third slide" />
+          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" >
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="" >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleControls"  role="button" data-slide="next">
+      <a class="carousel-control-next" href="#carouselExampleControls"  role="button" data-slide="">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -66,6 +66,9 @@ export default {
   methods: {
     principal() {
       this.$router.push("/principal");
+    },
+    buscar() {
+      this.$router.push("/resultado");
     },
   },
 };
