@@ -6,35 +6,39 @@
     </div>
 
     <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Creador</th>
-      <th scope="col">$ Desde</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mario Kart</td>
-      <td>Otto</td>
-      <td>1000</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Doom</td>
-      <td>Thornton</td>
-      <td>$ 1500</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Lineage 2</td>
-      <td>the Bird</td>
-      <td>$ 950</td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Creador</th>
+          <th scope="col">Presupuesto necesario</th>
+          <th scope="col">Ver</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mario Kart</td>
+          <td>Otto</td>
+          <td>$ 1000</td>
+          <td><button>Ver</button></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Doom</td>
+          <td>Thornton</td>
+          <td>$ 1500</td>
+          <td><button>Ver</button></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Lineage 2</td>
+          <td>the Bird</td>
+          <td>$ 950</td>
+          <td><button>Ver</button></td>
+        </tr>
+      </tbody>
+    </table>
 
     <div>
       <button @click="buscar">Volver</button>

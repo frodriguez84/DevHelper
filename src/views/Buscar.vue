@@ -6,36 +6,53 @@
 
       <div class="check">
         <p>Buscar por genero</p>
-        <input type="checkbox" id="Accion" name="Accion" value="Bike" />
-        <label for="Accion">Accion</label><br />
-        <input type="checkbox" id="Estrategia" name="Estrategia" value="Car" />
-        <label for="Estrategia">Estrategia</label><br />
-        <input type="checkbox" id="Deportes" name="Deportes" value="Boat" />
-        <label for="Deportes">Deportes</label><br /><br />
-        <input type="checkbox" id="Rol" name="Rol" value="Boat" />
-        <label for="Rol">Rol</label><br /><br />
-        <input type="checkbox" id="Aventura" name="Aventura" value="Boat" />
-        <label for="Aventura">Aventura</label><br /><br />
+        
+
+        <div class="checkbox">
+          <label><input type="checkbox" value="" />Estrategia</label>
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="" />Rol</label>
+        </div>
+        <div class="checkbox disabled">
+          <label><input type="checkbox" value="" />Rpg</label>
+        </div>
+        <div class="checkbox disabled">
+          <label><input type="checkbox" value="" />Deporte</label>
+        </div>
+        <div class="checkbox disabled">
+          <label><input type="checkbox" value="" />Accion</label>
+        </div>
       </div>
     </div>
 
-    <div id="carouselExampleControls" class="pos" data-ride="carousel" >
+    <div id="carouselExampleControls" class="pos" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt=""/>
+          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt=""/>
+          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="" >
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleControls"
+        role="button"
+        data-slide=""
+      >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carouselExampleControls"  role="button" data-slide="">
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleControls"
+        role="button"
+        data-slide=""
+      >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -81,7 +98,6 @@ export default {
   left: 600px;
   width: 600px;
   height: 250px;
-  background-color: red;
 }
 .check {
   position: fixed;
