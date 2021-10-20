@@ -70,7 +70,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Principal",
+  name: "Buscar",
   components: {
     HelloWorld,
   },

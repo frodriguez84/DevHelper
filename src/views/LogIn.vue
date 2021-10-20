@@ -36,7 +36,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "LogIn",
+  name: "Login",
   components: {
     HelloWorld,
   },

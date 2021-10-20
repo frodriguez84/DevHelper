@@ -26,8 +26,17 @@
       <router-link to="/buscar">Buscar</router-link> |
     </div> -->
     <router-view />
+<footer class="sticky-footer">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright © Your Website 2019</span>
+            </div>
+        </div>
+    </footer>
+    
   </div>
 </template>
+
 
 
 <style>
@@ -50,6 +59,28 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+footer.sticky-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: dimgray;
+}
+
+footer.sticky-footer .copyright {
+  line-height: 1;
+  font-size: 0.9rem;
+  color:white;
+}
+
+@media (min-width: 768px) {
+  footer.sticky-footer {
+    width: calc(100% - 0px);
+  }
 }
 </style>  
 

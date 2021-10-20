@@ -21,21 +21,21 @@
           <td>Mario Kart</td>
           <td>Otto</td>
           <td>$ 1000</td>
-          <td><button>Ver</button></td>
+          <td><button @click="producto">Ver</button></td>
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>Doom</td>
           <td>Thornton</td>
           <td>$ 1500</td>
-          <td><button>Ver</button></td>
+          <td><button @click="producto">Ver</button></td>
         </tr>
         <tr>
           <th scope="row">3</th>
           <td>Lineage 2</td>
           <td>the Bird</td>
           <td>$ 950</td>
-          <td><button>Ver</button></td>
+          <td><button @click="producto">Ver</button></td>
         </tr>
       </tbody>
     </table>
@@ -51,7 +51,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Principal",
+  name: "Resultado",
   components: {
     HelloWorld,
   },
@@ -62,6 +62,9 @@ export default {
   methods: {
     buscar() {
       this.$router.push("/buscar");
+    },
+    producto() {
+      this.$router.push("/producto");
     },
   },
 };

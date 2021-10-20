@@ -68,7 +68,7 @@
             <td>
               
                 <div>
-                <button>Ver</button> <span></span>
+                <button @click="producto">Ver</button> <span></span>
               </div>
             <td>
 
@@ -117,6 +117,9 @@ export default {
     },
     buscar() {
       this.$router.push("/buscar");
+    },
+    producto() {
+      this.$router.push("/producto");
     },
     agregarProyecto() {
       if (this.proyectoNuevo.length === 0) return;
