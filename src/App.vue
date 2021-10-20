@@ -12,6 +12,7 @@
             <b-nav-item :to="{name: 'Registro'}" active-class="active" exact>Registro</b-nav-item>
             <b-nav-item :to="{name: 'Principal'}" active-class="active" exact>Principal</b-nav-item>
             <b-nav-item :to="{name: 'Buscar'}" active-class="active" exact>Buscar</b-nav-item>
+            <b-nav-item :to="{name: 'Producto'}" active-class="active" exact>Producto</b-nav-item>
           </b-navbar-nav>
 
         </b-collapse>
