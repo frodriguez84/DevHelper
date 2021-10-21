@@ -44,14 +44,10 @@
                 />
               </div>
             </div>
-            <button
-              @click="registro"
-              type="submit"
-              class="btn btn-success btn-block"
-            >
-              Submit
-            </button>
-          </form>
+            <button @click="registro" type="submit" class="btn btn-success btn-block">
+              Submit </button>
+            </form>
+          <button @click="login" class="btn btn-secondary"> Login</button>
         </article>
       </section>
     </div>
@@ -99,6 +95,9 @@ export default {
   methods: {
     registro() {
       alert(this.mensaje);
+    },
+    login() {
+      this.$router.push("/login");
     },
   },
 };

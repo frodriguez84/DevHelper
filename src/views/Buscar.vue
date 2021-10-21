@@ -5,8 +5,7 @@
       <div><input type="text" /><button @click="buscar">Buscar</button></div>
 
       <div class="check">
-        <p>Buscar por genero</p>
-        
+        <p class="p">Buscar por genero</p>
 
         <div class="checkbox">
           <label><input type="checkbox" value="" />Estrategia</label>
@@ -32,7 +31,7 @@
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
+          <img class="d-block w-100" src="../img/bdg.jpg" alt="" />
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
@@ -45,7 +44,7 @@
         data-slide=""
       >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only"></span>
       </a>
       <a
         class="carousel-control-next"
@@ -54,7 +53,7 @@
         data-slide=""
       >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only"></span>
       </a>
     </div>
 
@@ -112,5 +111,14 @@ export default {
   left: 900px;
   width: 100px;
   height: 50px;
+}
+.checkbox {
+  text-align: left;
+}
+.p {
+  text-align: center;
+
+  width: 140%;
+  text-decoration-line: underline;
 }
 </style>

@@ -25,8 +25,8 @@
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Doom</td>
-          <td>Thornton</td>
+          <td>Baldur's Gate 3</td>
+          <td>Larian</td>
           <td>$ 1500</td>
           <td><button @click="producto">Ver</button></td>
         </tr>

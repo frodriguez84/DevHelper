@@ -32,6 +32,7 @@
           <tr v-for="(p, index) in proyectos" :key="index">
             
             <td>
+              
               <span :class="{ finalizado: p.estado === 'finalizado' }">{{
                 firstCharUpper(p.nombre)}}</span>
             </td>
@@ -79,7 +80,7 @@
       </table>
       <hr>
       <div>
-        <button class="btn btn-secondary" @click="home">Log out</button>
+        <button class="btn btn-secondary" @click="home">Logout</button>
       </div>
       <br>
       <div>

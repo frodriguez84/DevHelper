@@ -54,12 +54,11 @@
           :precision="2"
           class="mb-5"
         ></b-progress>
+        <b-button @click="principal" variant="dark">Volver</b-button>
       </div>
     </div>
 
-    <div>
-      <button @click="principal">Volver</button>
-    </div>
+    
   </div>
 </template>
 
@@ -101,7 +100,7 @@ export default {
 }
 .pos2 {
   position: FIXED;
-  top: 250px;
+  top: 270px;
   left: 700px;
   width: 650px;
   height: 300px;
