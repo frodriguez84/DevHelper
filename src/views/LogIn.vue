@@ -16,19 +16,19 @@
             id="login"
             class="fadeIn second"
             name="login"
-            placeholder="Usuario"
+            placeholder="Usuario" v-model="usuario"
           />
           <input
             type="text"
             id="password"
             class="fadeIn third"
             name="login"
-            placeholder="Password"
+            placeholder="Password" v-model="password"
           />
           <input
             type="submit"
             class="fadeIn fourth"
-            value="Log In"
+            value="Log In" 
             @click="principal"
           />
         </form>
@@ -85,6 +85,8 @@ export default {
     return {
       titulo: "Prueba de Data",
       num: 0,
+      usuario:"",
+      password:"",
     };
   },
 
