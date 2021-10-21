@@ -80,6 +80,7 @@ export default {
       nombreJuego: "Baldur's Gate 3",
       descripcion: "Agregar una descripcion",
       striped: true,
+      
     };
   },
   methods: {
