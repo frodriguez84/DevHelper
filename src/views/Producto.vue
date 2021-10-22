@@ -35,7 +35,7 @@
       <div class="pos2">
         <h5>Staff / Staff completo</h5>
         <b-progress
-          :value="90"
+          :value="80"
           :max="max"
           :precision="2"
           show-value

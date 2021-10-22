@@ -28,7 +28,7 @@
           <input
             type="submit"
             class="fadeIn fourth"
-            value="Log In" 
+            value="Login" 
             @click="principal"
           />
         </form>

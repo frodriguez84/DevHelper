@@ -8,19 +8,19 @@
         <p class="p">Buscar por genero</p>
 
         <div class="checkbox">
-          <label><input type="checkbox" value="" />Estrategia</label>
+          <label><input type="checkbox" value=""/>Estrategia</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox" value="" />Rol</label>
+          <label><input type="checkbox" value=""/>Rol</label>
         </div>
-        <div class="checkbox disabled">
-          <label><input type="checkbox" value="" />Rpg</label>
+        <div class="checkbox ">
+          <label><input type="checkbox" value=""/>Rpg</label>
         </div>
-        <div class="checkbox disabled">
-          <label><input type="checkbox" value="" />Deporte</label>
+        <div class="checkbox ">
+          <label><input type="checkbox" value=""/>Deporte</label>
         </div>
-        <div class="checkbox disabled">
-          <label><input type="checkbox" value="" />Accion</label>
+        <div class="checkbox ">
+          <label><input type="checkbox" value=""/>Accion</label>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
         <div class="carousel-item active">
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item" >
           <img class="d-block w-100" src="../img/bdg.jpg" alt="" />
         </div>
         <div class="carousel-item">
