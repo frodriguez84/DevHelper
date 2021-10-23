@@ -60,11 +60,11 @@
             </td>
             <td>
               <div>
-                <button>Dev</button> <span></span>
+                <button @click="addProyect">Dev</button> <span></span>
               </div>
             </td>
                 <div>
-                <button>Patrocinar</button> <span></span>
+                <button @click="addProyect">Patrocinar</button> <span></span>
               </div>
             <td>
               
@@ -80,11 +80,15 @@
       </table>
       <hr>
       <div>
-        <button class="btn btn-secondary" @click="home">Logout</button>
+        <button class="btn btn-dark" @click="home">Logout</button>
       </div>
       <br>
       <div>
-        <button @click="buscar" class="btn btn-secondary">Buscar proyecto</button>
+        <button @click="buscar" class="btn btn-dark">Buscar proyecto</button>
+      </div>
+      <br>
+      <div>
+        <button @click="moduloUsuario" class="btn btn-dark">Ir Modulo Usuario</button>
       </div>
     </div>
   </div>
@@ -109,18 +113,25 @@ export default {
       titulo: "Pagina Principal",
       proyectos: [],
       estados: ["reclutando", "en progreso", "finalizado"],
+      msj: "Proyecto agregado, porfavor visite su modulo para ver mas detalles"
     };
   },
 
   methods: {
+    addProyect(){
+      alert(this.msj)
+    },
     home() {
       this.$router.push("/");
     },
     buscar() {
-      this.$router.push("/buscar");
+      this.$router.push("/tienda");
     },
     producto() {
       this.$router.push("/producto");
+    },
+    moduloUsuario() {
+      this.$router.push("/modulo_usuario");
     },
     agregarProyecto() {
       if (this.proyectoNuevo.length === 0) return;

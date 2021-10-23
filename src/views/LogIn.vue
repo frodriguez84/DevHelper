@@ -16,22 +16,25 @@
             id="login"
             class="fadeIn second"
             name="login"
-            placeholder="Usuario" v-model="usuario"
+            placeholder="Usuario"
           />
           <input
             type="text"
             id="password"
             class="fadeIn third"
             name="login"
-            placeholder="Password" v-model="password"
+            placeholder="Password"
           />
           <input
             type="submit"
             class="fadeIn fourth"
-            value="Login" 
+            value="Login"
             @click="principal"
           />
         </form>
+        
+        
+        
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
@@ -39,34 +42,6 @@
         </div>
       </div>
     </div>
-
-    <!--<h1>Pagina de LogIn</h1>
-
-    <div>
-      <h2>DNI</h2>
-      <input type="text" />
-    </div>
-    <div>
-      <h2>Constraseña</h2>
-      <input type="text" />
-    </div>
-    <br />
-    <div>
-      <button @click="principal">Ingresar</button>
-
-      <br />
-      <br />
-      <div>
-        <h2>Crear cuenta</h2>
-        <button @click="registro">Registrarse</button>
-      </div>
-      <br />
-      <br />
-      <br />
-     
-      <button @click="suma">Prueba +1 en LogIn</button>
-      <h2>{{ num }}</h2>
-    </div> -->
   </div>
 </template>
 
@@ -85,8 +60,7 @@ export default {
     return {
       titulo: "Prueba de Data",
       num: 0,
-      usuario:"",
-      password:"",
+      
     };
   },
 

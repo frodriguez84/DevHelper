@@ -1,15 +1,14 @@
 <template>
   <div class="home">
-   <img alt="Vue logo" src="../assets/logo.png"> 
-    
+    <img alt="Vue logo" src="../assets/logo.png" />
+
     <h3>La solucion a tus proyectos</h3>
 
-  <div>
-    
-  <button @click="login">Logeate</button>
-
-  </div>
-
+    <div>
+      <button class="btn btn-dark" @click="login">Ingresar</button>
+    </div>
+    <br>
+    <hr> 
     <h4>{{ titulo }}</h4>
     <button @click="suma">+1</button>
     <h1>{{ num }}</h1>
@@ -19,27 +18,24 @@
 <script>
 // @ is an alias to /src
 
-
 export default {
-  name: 'Home',
-  components: {
-    
-  },
+  name: "Home",
+  components: {},
 
-  data(){
-    return{
+  data() {
+    return {
       titulo: "Prueba de Data",
       num: 0,
-    }
+    };
   },
 
-  methods:{
-    suma(){
-      this.num++
+  methods: {
+    suma() {
+      this.num++;
     },
-    login(){
-      this.$router.push("/login")
+    login() {
+      this.$router.push("/login");
     },
-  }
-}
+  },
+};
 </script>

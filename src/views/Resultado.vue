@@ -5,7 +5,7 @@
       <h4>Estas buscando por: Aventura, Rol</h4>
     </div>
 
-    <table class="table table-dark">
+    <table class="table table-success">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -41,7 +41,7 @@
     </table>
 
     <div>
-      <button @click="buscar">Volver</button>
+      <button @click="tienda">Volver</button>
     </div>
   </div>
 </template>
@@ -60,8 +60,8 @@ export default {
   },
 
   methods: {
-    buscar() {
-      this.$router.push("/buscar");
+    tienda() {
+      this.$router.push("/tienda");
     },
     producto() {
       this.$router.push("/producto");

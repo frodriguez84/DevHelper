@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>{{ titulo }}</h1>
+    <h3>{{subtitulo}}</h3>
     <div class="d-flex">
       <div><input type="text" /><button @click="buscar">Buscar</button></div>
 
@@ -58,7 +59,7 @@
     </div>
 
     <div class="separador">
-      <button @click="principal">Volver</button>
+      <button class="btn btn-dark" @click="principal">Volver</button>
     </div>
   </div>
 </template>
@@ -76,7 +77,8 @@ export default {
 
   data() {
     return {
-      titulo: "Buscar proyecto",
+      titulo: "Tienda",
+      subtitulo: "Descubri todo lo que tenemos",
     };
   },
   methods: {
