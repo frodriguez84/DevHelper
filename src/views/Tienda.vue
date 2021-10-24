@@ -1,28 +1,19 @@
 <template>
   <div class="container">
     <h1>{{ titulo }}</h1>
-    <h3>{{subtitulo}}</h3>
+    <h3>{{ subtitulo }}</h3>
     <div class="d-flex">
       <div><input type="text" /><button @click="buscar">Buscar</button></div>
 
       <div class="check">
-        <p class="p">Buscar por genero</p>
-
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Estrategia</label>
-        </div>
-        <div class="checkbox">
-          <label><input type="checkbox" value=""/>Rol</label>
-        </div>
-        <div class="checkbox ">
-          <label><input type="checkbox" value=""/>Rpg</label>
-        </div>
-        <div class="checkbox ">
-          <label><input type="checkbox" value=""/>Deporte</label>
-        </div>
-        <div class="checkbox ">
-          <label><input type="checkbox" value=""/>Accion</label>
-        </div>
+          <p class="p">Buscar por genero</p>
+        <form class="checkbox">
+          <b-form-checkbox-group v-model="check" :options="tipos">
+          </b-form-checkbox-group>
+            <p>
+              Filtro: <strong>{{ check }}</strong>
+            </p>
+        </form>
       </div>
     </div>
 
@@ -31,7 +22,7 @@
         <div class="carousel-item active">
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
         </div>
-        <div class="carousel-item" >
+        <div class="carousel-item">
           <img class="d-block w-100" src="../img/bdg.jpg" alt="" />
         </div>
         <div class="carousel-item">
@@ -70,7 +61,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Buscar",
+  name: "Tienda",
   components: {
     HelloWorld,
   },
@@ -79,6 +70,15 @@ export default {
     return {
       titulo: "Tienda",
       subtitulo: "Descubri todo lo que tenemos",
+      check: [],
+      tipos: [
+        { value: "Estrategia", text: "Estrategia" },
+        { value: "Rol", text: "Rol" },
+        { value: "Rpg", text: "Rpg" },
+        { value: "Deporte", text: "Deporte" },
+        { value: "Accion", text: "Accion" },
+        { value: "Indie", text: "Indie" },
+      ],
     };
   },
   methods: {
@@ -91,13 +91,12 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .pos {
   position: FIXED;
   top: 150px;
-  left: 600px;
-  width: 600px;
+  left: 660px;
+  width: 700px;
   height: 250px;
 }
 .check {
@@ -116,6 +115,7 @@ export default {
 }
 .checkbox {
   text-align: left;
+  width: 30em;
 }
 .p {
   text-align: center;

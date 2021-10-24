@@ -44,35 +44,19 @@
                 />
               </div>
             </div>
-            <button @click="registro" type="submit" class="btn btn-success btn-block">
-              Submit </button>
-            </form>
-            <br>
+            <button
+              @click="registro"
+              type="submit"
+              class="btn btn-success btn-block"
+            >
+              Submit
+            </button>
+          </form>
+          <br />
           <button @click="login" class="btn btn-dark">Al Login</button>
         </article>
       </section>
     </div>
-
-    <!-- <h1>Registro nuevo usuario</h1>
-    <div>
-      <h2>DNI</h2>
-      <input type="text" />
-    </div>
-    <div>
-      <h2>Constraseña</h2>
-      <input type="password" />
-    </div>
-    <div>
-      <h2>Repetir Constraseña</h2>
-      <input type="password" />
-    </div>
-    <div>
-      <h2>Email</h2>
-      <input type="email" />
-    </div><br /><br /><br />
-    <div>
-      <button @click="registro">Registrarse</button>
-    </div> -->
   </div>
 </template>
 

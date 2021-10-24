@@ -94,7 +94,7 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Resultado",
+  name: "ModuloUsuario",
   components: {
     HelloWorld,
   },
