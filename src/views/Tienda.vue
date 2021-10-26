@@ -77,6 +77,7 @@ export default {
         { value: "Deporte", text: "Deporte" },
         { value: "Accion", text: "Accion" },
         { value: "Indie", text: "Indie" },
+        { value: "Aventura", text: "Aventura" },
       ],
     };
   },

@@ -21,14 +21,7 @@
         </b-collapse>
       </b-container>
     </b-navbar>
-
-    <!--<div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Log In</router-link> |
-      <router-link to="/registro">Registro</router-link> |
-      <router-link to="/principal">Principal</router-link> |
-      <router-link to="/buscar">Buscar</router-link> |
-    </div> -->
+    <HelloWorld/>
     <router-view />
 <footer class="sticky-footer">
         <div class="container my-auto">
@@ -41,7 +34,17 @@
   </div>
 </template>
 
+<script>
 
+import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'app',
+  components:{
+    HelloWorld
+  }
+}
+</script>
 
 <style>
 #app {

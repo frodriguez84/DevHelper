@@ -13,16 +13,16 @@
         <form>
           <input
             type="text"
-            id="login"
+            id="user"
             class="fadeIn second"
-            name="login"
+            name="user"
             placeholder="Usuario"
           />
           <input
             type="text"
             id="password"
             class="fadeIn third"
-            name="login"
+            name="password"
             placeholder="Password"
           />
           <input
@@ -48,18 +48,18 @@
 
 <script>
 
-import HelloWorld from "@/components/HelloWorld.vue";
+
 
 export default {
   name: "Login",
-  components: {
-    HelloWorld,
-  },
+  
 
   data() {
     return {
       titulo: "Prueba de Data",
       num: 0,
+      user: '',
+      password: '',
       
     };
   },

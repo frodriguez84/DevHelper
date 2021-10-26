@@ -1,17 +1,21 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-
     <h3>La solucion a tus proyectos</h3>
-
     <div>
       <button class="btn btn-dark" @click="login">Ingresar</button>
     </div>
-    <br>
     <hr> 
-    <h4>{{ titulo }}</h4>
-    <button @click="suma">+1</button>
-    <h1>{{ num }}</h1>
+    <h2>Amigos</h2>
+    <input type="text" v-model="amigo">
+    <button @click="addAmigo">Agregar Amigo</button>
+    <ul>
+      <li 
+      v-for="(amigo, index) in $store.state.amigos" 
+      :key="index">
+      {{ amigo }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -19,12 +23,12 @@
 
 export default {
   name: "Home",
-  components: {},
 
   data() {
     return {
       titulo: "Prueba de Data",
       num: 0,
+      amigo: '',
     };
   },
 
@@ -35,6 +39,12 @@ export default {
     login() {
       this.$router.push("/login");
     },
+    addAmigo(){
+      this.$store.state.amigo = this.amigo;
+      this.$store.dispatch('addAmigoAction')
+      this.amigo = '';
+    },
+
   },
 };
 </script>

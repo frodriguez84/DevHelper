@@ -73,14 +73,16 @@ export default {
   data() {
     return {
       mensaje:
-        "Se envio un mail a su casilla de correo. Ingrese sus crendenciales en la pantalla de login",
+        "Usuario creado, en un momento seras redireccionado",
     };
   },
 
   methods: {
     registro() {
       alert(this.mensaje);
+
     },
+    
     login() {
       this.$router.push("/login");
     },
