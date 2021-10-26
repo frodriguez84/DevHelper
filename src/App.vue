@@ -3,10 +3,12 @@
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <b-navbar-toogle target="nav_collapse"></b-navbar-toogle>
+          
         <b-navbar-brand href="#">DevHelper</b-navbar-brand>
-
+         <!--<b-navbar-brand class="user">Usuario </b-navbar-brand>-->
         <b-collapse is-nav id="nav_collapse"> 
           <b-navbar-nav>
+            
             <b-nav-item :to="{name: 'Home'}" active-class="active" exact>Home</b-nav-item>
             <b-nav-item :to="{name: 'Login'}" active-class="active" exact>Login</b-nav-item>
             <b-nav-item :to="{name: 'Registro'}" active-class="active" exact>Registro</b-nav-item>
@@ -83,6 +85,7 @@ footer.sticky-footer .copyright {
   footer.sticky-footer {
     width: calc(100% - 0px);
   }
+  
 }
 </style>  
 
