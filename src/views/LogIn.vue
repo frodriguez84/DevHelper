@@ -11,14 +11,16 @@
 
         <!-- Login Form -->
         <form>
-          <input v-model="documento"
+          <input
+            v-model="nombre"
             type="text"
             id="user"
             class="fadeIn second"
             name="user"
             placeholder="Usuario"
           />
-          <input v-model="password"
+          <input
+            v-model="password"
             type="text"
             id="password"
             class="fadeIn third"
@@ -29,12 +31,9 @@
             type="submit"
             class="fadeIn fourth"
             value="Login"
-            @click="validarUsuario(documento, password)"
+            @click="validarUsuario(nombre, password)"
           />
         </form>
-        
-        
-        
 
         <!-- Remind Passowrd -->
         <div id="formFooter">
@@ -47,22 +46,17 @@
 
 
 <script>
-
 import { mapGetters } from "vuex";
-
 
 export default {
   name: "Login",
-  
+
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
   },
 
   data() {
-    return {
-
-      
-    };
+    return {};
   },
 
   methods: {
@@ -75,26 +69,24 @@ export default {
     principal() {
       this.$router.push("/principal");
     },
-    validarUsuario(documento , password){
-            let pass = false;
+    validarUsuario(documento, password) {
+      let pass = false;
 
-            this.usuarios.forEach(element => {
+      this.usuarios.forEach((usuario) => {
+        if (usuario.nombre == documento && usuario.clave == password) {
+          pass = true;
+        }
+      });
 
-                if (element.nombre == documento && element.clave == password){
-                    pass = true;
-                };
-                
-            });
-
-
-            if (pass){
-               this.principal()
-            }else{
-                alert("Usuario o clave incorrecta");
-                pass = false;
-            };
-            return pass;
-        },
+      if (pass) {
+        this.principal();
+        this.$store.dispatch('setAuthAction')
+      } else {
+        alert("Usuario o clave incorrecta");
+        pass = false;
+      }
+      return pass;
+    },
   },
 };
 </script>

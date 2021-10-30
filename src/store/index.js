@@ -12,9 +12,15 @@ export default new Vuex.Store({
     amigos:[],
     amigo: null,
     usuarios:[],
+    usuario: null,
+    auth: false,
 
   },
   mutations: {
+    setAuth(state){
+      state.auth = !this.auth
+    },
+
     addAmigo(state){
       state.amigos = [state.amigo, ...state.amigos]
     },
@@ -28,6 +34,10 @@ export default new Vuex.Store({
     },
     agregarUsuario : ({commit}, usuario)=>{
       commit("agregarUsuario", usuario);
+    },
+
+    setAuthAction(context){
+      context.commit('setAuth')
     }
 
   },

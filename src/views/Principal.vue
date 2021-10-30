@@ -80,7 +80,7 @@
       </table>
       <hr>
       <div>
-        <button class="btn btn-dark" @click="home">Logout</button>
+        <button class="btn btn-dark" @click="logut">Logout</button>
       </div>
       <br>
       <div>
@@ -121,8 +121,15 @@ export default {
     addProyect(){
       alert(this.msj)
     },
-    home() {
-      this.$router.push("/");
+    logut() {
+      if(this.$store.state.auth == false){
+        this.$store.dispatch('setAuthAction')
+        this.$router.push("/");
+
+      }else{
+        this.$router.push("/");
+      }
+
     },
     buscar() {
       this.$router.push("/tienda");

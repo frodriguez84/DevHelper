@@ -1,61 +1,8 @@
 <template>
-  <div class="registro">
-    <div class="col-md-4 col-md-offset-4" id="login">
-      <section id="inner-wrapper" class="login">
-        <article>
-          <form>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><i class="fa fa-user"> </i
-                ></span>
-                <input type="text" class="form-control" placeholder="Nombre" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><i class="fa fa-envelope"> </i
-                ></span>
-                <input type="email" class="form-control" placeholder="Email" />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><i class="fa fa-key"> </i
-                ></span>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Password"
-                />
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"
-                  ><i class="fa fa-key"> </i
-                ></span>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="Confirmar Password"
-                />
-              </div>
-            </div>
-            <button
-              @click="registro"
-              type="submit"
-              class="btn btn-success btn-block"
-            >
-              Submit
-            </button>
-          </form>
-          <br />
-          <button @click="login" class="btn btn-dark">Al Login</button>
-        </article>
-      </section>
+  <div>
+    <AgregarUsuario />
+    <div>
+      <span>Usuarios: {{ usuarios }}</span>
     </div>
   </div>
 </template>
@@ -64,29 +11,26 @@
 
 import HelloWorld from "@/components/HelloWorld.vue";
 import AgregarUsuario from "../components/AgregarUsuario.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Registro",
   components: {
     HelloWorld,
+    AgregarUsuario,
+  },
+   computed: {
+    ...mapGetters({ usuarios: "getUsuarios" }),
   },
 
   data() {
     return {
-      mensaje:
-        "Usuario creado, en un momento seras redireccionado",
+      mensaje:"",
     };
   },
 
   methods: {
-    registro() {
-      alert(this.mensaje);
-
-    },
     
-    login() {
-      this.$router.push("/login");
-    },
   },
 };
 </script>
