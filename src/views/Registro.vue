@@ -61,8 +61,9 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
 import HelloWorld from "@/components/HelloWorld.vue";
+import AgregarUsuario from "../components/AgregarUsuario.vue";
 
 export default {
   name: "Registro",

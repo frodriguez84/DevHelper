@@ -11,16 +11,23 @@ export default new Vuex.Store({
     apellido: 'Cosetti',
     amigos:[],
     amigo: null,
+    usuarios:[],
 
   },
   mutations: {
     addAmigo(state){
       state.amigos = [state.amigo, ...state.amigos]
+    },
+    agregarUsuario : (state , usuario) =>{
+      state.usuarios.push(usuario);
     }
   },
   actions: {
     addAmigoAction(context){
       context.commit('addAmigo')
+    },
+    agregarUsuario : ({commit}, usuario)=>{
+      commit("agregarUsuario", usuario);
     }
 
   },
@@ -32,6 +39,9 @@ export default new Vuex.Store({
      },
      nombreCompleto(state){
       return `${state.nombre} ${state.apellido}`
-     }
+     },
+     getUsuarios:(state) => {
+      return state.usuarios;
+    },
   }
 })

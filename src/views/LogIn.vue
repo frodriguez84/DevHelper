@@ -11,14 +11,14 @@
 
         <!-- Login Form -->
         <form>
-          <input
+          <input v-model="documento"
             type="text"
             id="user"
             class="fadeIn second"
             name="user"
             placeholder="Usuario"
           />
-          <input
+          <input v-model="password"
             type="text"
             id="password"
             class="fadeIn third"
@@ -29,7 +29,7 @@
             type="submit"
             class="fadeIn fourth"
             value="Login"
-            @click="principal"
+            @click="validarUsuario(documento, password)"
           />
         </form>
         
@@ -48,18 +48,19 @@
 
 <script>
 
+import { mapGetters } from "vuex";
 
 
 export default {
   name: "Login",
   
+  computed: {
+    ...mapGetters({ usuarios: "getUsuarios" }),
+  },
 
   data() {
     return {
-      titulo: "Prueba de Data",
-      num: 0,
-      user: '',
-      password: '',
+
       
     };
   },
@@ -74,6 +75,26 @@ export default {
     principal() {
       this.$router.push("/principal");
     },
+    validarUsuario(documento , password){
+            let pass = false;
+
+            this.usuarios.forEach(element => {
+
+                if (element.nombre == documento && element.clave == password){
+                    pass = true;
+                };
+                
+            });
+
+
+            if (pass){
+               this.principal()
+            }else{
+                alert("Usuario o clave incorrecta");
+                pass = false;
+            };
+            return pass;
+        },
   },
 };
 </script>
