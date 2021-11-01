@@ -97,10 +97,12 @@ export default {
   name: "ModuloUsuario",
   components: {
     HelloWorld,
+    
   },
+
   data() {
     return {
-      usuario: "player_not_found",
+      usuario: this.$store.state.usuarios[0].nombre,
     };
   },
 

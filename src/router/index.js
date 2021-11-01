@@ -48,11 +48,7 @@ const routes = [
     name: 'ModuloUsuario',
     component: () => import(/* webpackChunkName: "about" */ '../views/ModuloUsuario.vue')
   },
-  {
-    path: '/usuarios',
-    name: 'usuarios',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AgregarUsuario.vue')
-  },
+ 
 ]
 
 const router = new VueRouter({

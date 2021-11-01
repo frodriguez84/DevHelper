@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import fs from 'fs'
 
 Vue.use(Vuex)
 
@@ -26,6 +27,10 @@ export default new Vuex.Store({
     },
     agregarUsuario : (state , usuario) =>{
       state.usuarios.push(usuario);
+      /* var usu = JSON.stringify(usuario)
+      fs.writeFile('bdUsuarios.json', usu, function(err, result){
+        if(err) console.log("error: ", err)
+      }) */
     }
   },
   actions: {
