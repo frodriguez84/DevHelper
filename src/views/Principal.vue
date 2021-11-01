@@ -21,6 +21,7 @@
           <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Estado</th>
+            <th scope="col">Genero</th>
             <th scope="col" class="text-center">Editar</th>
             <th scope="col" class="text-center">Borrar</th>
             <th scope="col">Quiero Desarrollar</th>
@@ -30,11 +31,10 @@
         </thead>
         <tbody>
           <tr v-for="(p, index) in proyectos" :key="index">
-            
             <td>
-              
               <span :class="{ finalizado: p.estado === 'finalizado' }">{{
-                firstCharUpper(p.nombre)}}</span>
+                firstCharUpper(p.nombre)
+              }}</span>
             </td>
             <td style="width: 120px">
               <span
@@ -43,52 +43,57 @@
                 :class="{
                   'text-danger': p.estado === 'reclutando',
                   'text-warning': p.estado === 'en progreso',
-                  'text-success': p.estado === 'finalizado',}">
+                  'text-success': p.estado === 'finalizado',
+                }"
+              >
                 {{ firstCharUpper(p.estado) }}
               </span>
             </td>
             <td>
-              <div class="text-center" @click="editarProyecto(index)"> <button>Editar
-                <span class="fa fa-pen"></span>
-              </button>
+              <span @click="cambiarGenero(index)">
+                {{ firstCharUpper(p.genero) }}
+              </span>
+            </td>
+            <td>
+              <div class="text-center" @click="editarProyecto(index)">
+                <button>
+                  Editar
+                  <span class="fa fa-pen"></span>
+                </button>
               </div>
             </td>
             <td>
-              <div class="text-center" @click="borrarProyecto(index)"> <button>Borrar</button>
+              <div class="text-center" @click="borrarProyecto(index)">
+                <button>Borrar</button>
                 <span class="fa fa-trash"></span>
               </div>
             </td>
             <td>
-              <div>
-                <button @click="addProyect">Dev</button> <span></span>
-              </div>
+              <div><button @click="addProyect">Dev</button> <span></span></div>
             </td>
-                <div>
-                <button @click="addProyect">Patrocinar</button> <span></span>
-              </div>
+            <div>
+              <button @click="addProyect">Patrocinar</button> <span></span>
+            </div>
             <td>
-              
-                <div>
-                <button @click="producto">Ver</button> <span></span>
-              </div>
-            <td>
-
-          </td>
+              <div><button @click="producto">Ver</button> <span></span></div>
+            </td>
+   
           </tr>
-          
         </tbody>
       </table>
-      <hr>
+      <hr />
       <div>
         <button class="btn btn-dark" @click="logout">Logout</button>
       </div>
-      <br>
+      <br />
       <div>
         <button @click="buscar" class="btn btn-dark">Buscar proyecto</button>
       </div>
-      <br>
+      <br />
       <div>
-        <button @click="moduloUsuario" class="btn btn-dark">Ir Modulo Usuario</button>
+        <button @click="moduloUsuario" class="btn btn-dark">
+          Ir Modulo Usuario
+        </button>
       </div>
     </div>
   </div>
@@ -107,32 +112,28 @@ export default {
 
   data() {
     return {
-      creador: "",
       proyectoNuevo: "",
       proyectoEditado: null,
       titulo: "Pagina Principal",
       proyectos: [],
       estados: ["reclutando", "en progreso", "finalizado"],
-      msj: "Proyecto agregado, porfavor visite su modulo para ver mas detalles"
+      generos: ["Rol", "Rpg", "Accion", "Aventura", "Deportes", "Estrategia"],
+      msj: "Proyecto agregado, porfavor visite su modulo para ver mas detalles",
     };
   },
 
   methods: {
-    addProyect(){
-      alert(this.msj)
+    addProyect() {
+      alert(this.msj);
     },
     logout() {
-      if(this.$store.state.auth){
-        this.$store.state.auth = false
-        
-        this.$router.push("/");
-        
+      if (this.$store.state.auth) {
+        this.$store.state.auth = false;
 
-      }else{
-        
+        this.$router.push("/");
+      } else {
         this.$router.push("/");
       }
-
     },
     buscar() {
       this.$router.push("/tienda");
@@ -150,6 +151,7 @@ export default {
         this.proyectos.push({
           nombre: this.proyectoNuevo,
           estado: "reclutando",
+          genero: "A determinar",
         });
       } else {
         this.proyectos[this.proyectoEditado].nombre = this.proyectoNuevo;
@@ -172,6 +174,11 @@ export default {
       let nuevoIndex = this.estados.indexOf(this.proyectos[index].estado);
       if (++nuevoIndex > 2) nuevoIndex = 0;
       this.proyectos[index].estado = this.estados[nuevoIndex];
+    },
+    cambiarGenero(index) {
+      let nuevoIndex = this.generos.indexOf(this.proyectos[index].genero);
+      if (++nuevoIndex > 5) nuevoIndex = 0;
+      this.proyectos[index].genero = this.generos[nuevoIndex];
     },
 
     firstCharUpper(letra) {
