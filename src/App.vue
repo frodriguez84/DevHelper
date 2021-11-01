@@ -12,8 +12,9 @@
             <b-nav-item :to="{name: 'Home'}" active-class="active" exact>Home</b-nav-item>
             <template v-if="$store.state.auth">
               <span >
-              <b-navbar-brand class="user">Bienvenido: </b-navbar-brand>
-              <b-nav-item :to="{name: 'Login'}" active-class="active" exact>Logout</b-nav-item>
+              <b-navbar-brand class="user">Bienvenido: {{usuarios[0].nombre}}</b-navbar-brand>
+              <button @click="logout" class="user1">Logout</button>
+              <!-- <b-nav-item  :to="{name: 'Login'}" active-class="active" exact>Logout</b-nav-item> -->
               </span>
             </template>
             <template v-else>
@@ -64,6 +65,16 @@ export default {
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
   },
+  methods:{
+    logout() {
+      if(this.$store.state.auth){
+        this.$store.state.auth = false        
+        this.$router.push("/");
+      }else{       
+        this.$router.push("/");
+      }
+    },
+  }
   
 }
 </script>
@@ -114,7 +125,14 @@ footer.sticky-footer .copyright {
   .user{
     position:absolute;
     width:20%;
-    right: 5%;
+    right: 10%;
+    text-align:center;
+  }
+  .user1{
+    position:absolute;
+    width:5%;
+    right: 3%;
+    display:flexbox;
     text-align:center;
   }
 }
