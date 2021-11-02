@@ -11,21 +11,21 @@
             
             <b-nav-item :to="{name: 'Home'}" active-class="active" exact>Home</b-nav-item>
             <template v-if="$store.state.auth">
-              <span >
+ 
               <b-navbar-brand class="user">Bienvenido: {{usuarios[0].nombre}}</b-navbar-brand>
               <button @click="logout" class="user1">Logout</button>
-              <!-- <b-nav-item  :to="{name: 'Login'}" active-class="active" exact>Logout</b-nav-item> -->
-              </span>
+              
+              <b-nav-item :to="{name: 'Principal'}" active-class="active" exact>Principal</b-nav-item>
+              <b-nav-item :to="{name: 'Producto'}" active-class="active" exact>Producto</b-nav-item>
+              <b-nav-item :to="{name: 'ModuloUsuario'}" active-class="active" exact>Modulo Usuario</b-nav-item>
+              
             </template>
             <template v-else>
             <b-nav-item :to="{name: 'Login'}" active-class="active" exact>Login</b-nav-item>
+            <b-nav-item :to="{name: 'Registro'}" active-class="active" exact>Registro</b-nav-item>
+            <b-nav-item :to="{name: 'Tienda'}" active-class="active" exact>Tienda</b-nav-item>
 
             </template>
-            <b-nav-item :to="{name: 'Registro'}" active-class="active" exact>Registro</b-nav-item>
-            <b-nav-item :to="{name: 'Principal'}" active-class="active" exact>Principal</b-nav-item>
-            <b-nav-item :to="{name: 'Tienda'}" active-class="active" exact>Tienda</b-nav-item>
-            <b-nav-item :to="{name: 'Producto'}" active-class="active" exact>Producto</b-nav-item>
-            <b-nav-item :to="{name: 'ModuloUsuario'}" active-class="active" exact>Modulo Usuario</b-nav-item>
           </b-navbar-nav>
             <b-navbar-nav>
               <!-- <b-nav-item class="user">Bienvenido: {{usuarios.nombre}}</b-nav-item> -->

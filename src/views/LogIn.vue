@@ -3,7 +3,7 @@
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->
-
+        <h3>{{users}}</h3>
         <!-- Icon -->
         <div class="fadeIn first">
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
@@ -31,7 +31,7 @@
             type="submit"
             class="fadeIn fourth"
             value="Login"
-            @click="validarUsuario(nombre, password)"
+            @click="validation(nombre, password)"
           />
         </form>
 
@@ -53,6 +53,7 @@ export default {
 
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({users: "getUsers"})
   },
 
   data() {
@@ -60,9 +61,7 @@ export default {
   },
 
   methods: {
-    suma() {
-      this.num++;
-    },
+    
     registro() {
       this.$router.push("/registro");
     },
@@ -78,6 +77,24 @@ export default {
         }
       });
 
+      if (pass) {
+        this.principal();
+        this.$store.dispatch('setAuthAction')
+      } else {
+        alert("Usuario o clave incorrecta");
+        pass = false;
+      }
+      return pass;
+    },
+    validation(documento, password){
+      let pass = false
+      this.users.forEach((usuario) =>{
+        if (usuario.nombre == documento && usuario.password == password) {
+          pass = true;
+          console.log('esstoy en true')
+        }
+      })
+      console.log("estoy en false")
       if (pass) {
         this.principal();
         this.$store.dispatch('setAuthAction')

@@ -5,46 +5,44 @@
     <div>
       <button class="btn btn-dark" @click="login">Ingresar</button>
     </div>
-    <hr> 
-    <h2>Amigos</h2>
-    <input type="text" v-model="amigo">
-    <button @click="addAmigo">Agregar Amigo</button>
-    <ul>
-      <li 
-      v-for="(amigo, index) in $store.state.amigos" 
-      :key="index">
-      {{ amigo }}
-      </li>
-    </ul>
+    <hr />
+    
+    <div>
+      <button @click="getUsuarios">Obtener usuarios</button>
+      <ul>
+        <span v-for="user in usuarios" :key="user.id">[ {{user.nombre}} ]</span>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-
+import axios from "axios";
 export default {
   name: "Home",
 
   data() {
     return {
       titulo: "Prueba de Data",
-      num: 0,
-      amigo: '',
+      usuarios: [],
+      userSeleccionado: null,
     };
   },
 
   methods: {
-    suma() {
-      this.num++;
+    async getUsuarios() {
+      const url = "https://6180891b8bfae60017adfb16.mockapi.io/api/users";
+    let response = await axios.get(url);
+    this.usuarios = response.data;
+    /* this.userSeleccionado = response.data */
     },
+
     login() {
       this.$router.push("/login");
     },
-    addAmigo(){
-      this.$store.state.amigo = this.amigo;
-      this.$store.dispatch('addAmigoAction')
-      this.amigo = '';
-    },
-
+   
+    
   },
+  
 };
 </script>

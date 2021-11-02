@@ -1,47 +1,39 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import fs from 'fs'
+
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    msg: 'Mensaje desde el STATE',
-    msg2: 'Otro mensaje usando getters',
-    nombre: 'Maximo',
-    apellido: 'Cosetti',
-    amigos:[],
-    amigo: null,
-    usuarios:[],
+    usuarios: [],
+    users: [],
     usuario: null,
     auth: false,
+    url: "https://6180891b8bfae60017adfb16.mockapi.io/api/users",
 
   },
+  methods:{
+
+  },
+
   mutations: {
-    setAuth(state){
+    setAuth(state) {
       state.auth = !this.auth
     },
 
-    addAmigo(state){
-      state.amigos = [state.amigo, ...state.amigos]
-    },
-    agregarUsuario : (state , usuario) =>{
+    agregarUsuario: (state, usuario) => {
       state.usuarios.push(usuario);
-      /* var usu = JSON.stringify(usuario)
-      fs.writeFile('bdUsuarios.json', usu, function(err, result){
-        if(err) console.log("error: ", err)
-      }) */
-    }
+    },
+
   },
   actions: {
-    addAmigoAction(context){
-      context.commit('addAmigo')
-    },
-    agregarUsuario : ({commit}, usuario)=>{
+
+    agregarUsuario: ({ commit }, usuario) => {
       commit("agregarUsuario", usuario);
     },
 
-    setAuthAction(context){
+    setAuthAction(context) {
       context.commit('setAuth')
     }
 
@@ -49,14 +41,16 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
-     mensaje(state){
-       return state.msg2;
-     },
-     nombreCompleto(state){
-      return `${state.nombre} ${state.apellido}`
-     },
-     getUsuarios:(state) => {
+    getUsuarios: (state) => {
       return state.usuarios;
     },
-  }
+
+    async getUsers() {
+      let response = await axios.get(url);
+      this.users = response.data
+    }
+  },
+  created() {
+    this.getUsers()
+  },
 })

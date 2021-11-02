@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
-    <!-- <h4>{{ $store.state.msg }}</h4>
-    <h4>{{ $store.getters.mensaje }}</h4>
-    <h4>{{ $store.getters.nombreCompleto }}</h4> -->
+    
     
   </div>
 </template>
