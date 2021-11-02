@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Modulo del usuario: {{ usuario }}</h1>
+    <h1>Modulo del usuario: {{ this.$store.state.userSeleccionado.nombre }}</h1>
     <div>
       <h4>Proyectos DEV</h4>
     </div>

@@ -12,10 +12,11 @@
             <b-nav-item :to="{name: 'Home'}" active-class="active" exact>Home</b-nav-item>
             <template v-if="$store.state.auth">
  
-              <b-navbar-brand class="user">Bienvenido: {{usuarios[0].nombre}}</b-navbar-brand>
+              <b-navbar-brand class="user">Bienvenido: {{this.$store.state.userSeleccionado.nombre}}</b-navbar-brand>
               <button @click="logout" class="user1">Logout</button>
               
               <b-nav-item :to="{name: 'Principal'}" active-class="active" exact>Principal</b-nav-item>
+               <b-nav-item :to="{name: 'Tienda'}" active-class="active" exact>Tienda</b-nav-item>
               <b-nav-item :to="{name: 'Producto'}" active-class="active" exact>Producto</b-nav-item>
               <b-nav-item :to="{name: 'ModuloUsuario'}" active-class="active" exact>Modulo Usuario</b-nav-item>
               

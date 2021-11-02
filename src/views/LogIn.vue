@@ -3,7 +3,7 @@
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->
-        <h3>{{users}}</h3>
+        
         <!-- Icon -->
         <div class="fadeIn first">
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
@@ -20,7 +20,7 @@
             placeholder="Usuario"
           />
           <input
-            v-model="password"
+            v-model="clave"
             type="text"
             id="password"
             class="fadeIn third"
@@ -28,10 +28,10 @@
             placeholder="Password"
           />
           <input
-            type="submit"
+            type="button"
             class="fadeIn fourth"
             value="Login"
-            @click="validation(nombre, password)"
+            @click="validation(nombre, clave)"
           />
         </form>
 
@@ -47,63 +47,50 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+import axios from "axios";
 export default {
   name: "Login",
 
   computed: {
-    ...mapGetters({ usuarios: "getUsuarios" }),
-    ...mapGetters({users: "getUsers"})
+    
+    
   },
 
   data() {
-    return {};
+    return {
+      listaUsuarios: null,
+      
+    };
   },
 
   methods: {
-    
     registro() {
       this.$router.push("/registro");
     },
     principal() {
       this.$router.push("/principal");
     },
-    validarUsuario(documento, password) {
-      let pass = false;
+   
+    validation(nombre, clave) {
 
-      this.usuarios.forEach((usuario) => {
-        if (usuario.nombre == documento && usuario.clave == password) {
-          pass = true;
-        }
-      });
+      const u = this.listaUsuarios.find(usuario => usuario.nombre == nombre && usuario.password == clave);
 
-      if (pass) {
+      if(u){
         this.principal();
-        this.$store.dispatch('setAuthAction')
-      } else {
+        this.$store.dispatch("setAuthAction");
+      }else{
         alert("Usuario o clave incorrecta");
-        pass = false;
-      }
-      return pass;
+      }  
+      this.$store.state.userSeleccionado = u
+      
     },
-    validation(documento, password){
-      let pass = false
-      this.users.forEach((usuario) =>{
-        if (usuario.nombre == documento && usuario.password == password) {
-          pass = true;
-          console.log('esstoy en true')
-        }
-      })
-      console.log("estoy en false")
-      if (pass) {
-        this.principal();
-        this.$store.dispatch('setAuthAction')
-      } else {
-        alert("Usuario o clave incorrecta");
-        pass = false;
-      }
-      return pass;
-    },
+  },
+  async mounted() {
+    let url = "https://6180891b8bfae60017adfb16.mockapi.io/api/users";
+    let response = await axios.get(url);
+    //console.log(response.data)
+    this.listaUsuarios = response.data;
+    console.log(this.listaUsuarios);
   },
 };
 </script>

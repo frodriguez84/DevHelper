@@ -11,6 +11,8 @@
       <button @click="getUsuarios">Obtener usuarios</button>
       <ul>
         <span v-for="user in usuarios" :key="user.id">[ {{user.nombre}} ]</span>
+        <br>
+        <span v-for="user in usuarios" :key="user.id">[ {{user.password}} ]</span>
       </ul>
     </div>
   </div>
@@ -25,15 +27,14 @@ export default {
     return {
       titulo: "Prueba de Data",
       usuarios: [],
-      userSeleccionado: null,
     };
   },
 
   methods: {
     async getUsuarios() {
       const url = "https://6180891b8bfae60017adfb16.mockapi.io/api/users";
-    let response = await axios.get(url);
-    this.usuarios = response.data;
+    let response = await axios.get(url)
+    this.usuarios = response.data
     /* this.userSeleccionado = response.data */
     },
 

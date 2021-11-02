@@ -11,6 +11,7 @@ export default new Vuex.Store({
     usuario: null,
     auth: false,
     url: "https://6180891b8bfae60017adfb16.mockapi.io/api/users",
+    userSeleccionado: null,
 
   },
   methods:{
