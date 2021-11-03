@@ -34,7 +34,6 @@
         </b-collapse>
       </b-container>
     </b-navbar>
-    <HelloWorld/>
     <router-view />
 <footer class="sticky-footer">
         <div class="container my-auto">
@@ -51,18 +50,23 @@
 
 <script>
 
-import HelloWorld from './components/HelloWorld.vue'
-import AgregarUsuarios from './components/AgregarUsuario.vue'
-import { mapGetters } from "vuex";
 
+import AgregarUsuarios from './components/AgregarUsuario.vue'
+import { mapGetters, mapActions } from "vuex";
+import axios from 'axios'
 export default {
   name: 'app',
 
   components:{
-    HelloWorld,
     AgregarUsuarios
     
   },
+  data(){
+    return{
+      url: "https://618194d132c9e2001780488e.mockapi.io/api/products",
+    }
+  },
+  
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
   },
@@ -75,6 +79,16 @@ export default {
         this.$router.push("/");
       }
     },
+    ...mapActions("llenarProyectos")
+
+  },
+  created(){
+    axios.get(this.url)
+    .then((result)=>{
+    
+    this.$store.dispatch("llenarProyectos" , result.data);
+
+    })  
   }
   
 }

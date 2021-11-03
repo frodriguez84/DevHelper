@@ -1,28 +1,27 @@
 <template>
-  <div> Usuarios: {{ usuarios }}
+  <div> Usuarios: {{ listaUsuarios }}
     <AgregarUsuario />
     
   </div>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+
 import AgregarUsuario from "../components/AgregarUsuario.vue";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Registro",
   components: {
-    HelloWorld,
     AgregarUsuario,
   },
   computed: {
-    ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ listaUsuarios: "getUsuarios" }),
   },
 
   data() {
     return {
-      mensaje: "",
+      
     };
   },
 

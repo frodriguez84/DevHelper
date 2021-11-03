@@ -3,18 +3,24 @@ import Vuex from 'vuex'
 
 
 Vue.use(Vuex)
+import axios from 'axios'
 
 export default new Vuex.Store({
   state: {
     usuarios: [],
-    users: [],
-    usuario: null,
     auth: false,
-    url: "https://6180891b8bfae60017adfb16.mockapi.io/api/users",
     userSeleccionado: null,
+    listaUsuarios: [],
+    proyectos: [],
+    url: "https://618194d132c9e2001780488e.mockapi.io/api/products",
+    filter: {
+      query: '',
+      disponible: true,
+    }
+
 
   },
-  methods:{
+  methods: {
 
   },
 
@@ -24,7 +30,17 @@ export default new Vuex.Store({
     },
 
     agregarUsuario: (state, usuario) => {
-      state.usuarios.push(usuario);
+      state.listaUsuarios.push(usuario);
+    },
+    SET_QUERY(state, query) {
+      state.filter.query = query;
+    },
+    SET_DISPONIBLE(state) {
+      state.filter.disponible = !state.filter.disponible;
+    },
+
+    llenarProyectos: (state, proyectos) => {
+      state.proyectos = proyectos
     },
 
   },
@@ -36,22 +52,29 @@ export default new Vuex.Store({
 
     setAuthAction(context) {
       context.commit('setAuth')
-    }
+    },
+
+    llenarProyectos: ({ commit }, proyectos) => {
+      commit('llenarProyectos', proyectos)
+    },
 
   },
   modules: {
   },
   getters: {
     getUsuarios: (state) => {
-      return state.usuarios;
+      return state.listaUsuarios;
     },
+    filteredProyects(state) {
+      if (state.filter.query.length > 2) {
+        let proyectos = state.proyectos.filter(p => p.disponible === state.filter.disponible)
+        return proyectos.filter(p => p.titulo.toLowerCase().includes(state.filter.query));
+      }
+      return proyectos;
+    },
+    getProyectos: (state) => {
+      return state.proyectos
+    },
+  },
 
-    async getUsers() {
-      let response = await axios.get(url);
-      this.users = response.data
-    }
-  },
-  created() {
-    this.getUsers()
-  },
 })

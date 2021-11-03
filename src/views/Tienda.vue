@@ -1,23 +1,32 @@
 <template>
   <div class="container">
     <h1>{{ titulo }}</h1>
-    <h3>{{ subtitulo }}</h3>
+    
+    <proyectos-app></proyectos-app>
+    <!-- <div>
+      
+      <ul>
+        <span v-for="p in listaProyectos" :key="p.id">[{{p.titulo}}]</span>
+      </ul>
+      
+    </div> -->
+    <!-- <h3>{{ subtitulo }}</h3>
     <div class="d-flex">
       <div><input type="text" /><button @click="buscar">Buscar</button></div>
 
       <div class="check">
-          <p class="p">Buscar por genero</p>
+        <p class="p">Buscar por genero</p>
         <form class="checkbox">
           <b-form-checkbox-group v-model="check" :options="tipos">
           </b-form-checkbox-group>
-            <p>
-              Filtro: <strong>{{ check }}</strong>
-            </p>
+          <p>
+            Filtro: <strong>{{ check }}</strong>
+          </p>
         </form>
       </div>
-    </div>
+    </div> -->
 
-    <div id="carouselExampleControls" class="pos" data-ride="carousel">
+    <!-- <div id="carouselExampleControls" class="pos" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
@@ -47,7 +56,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only"></span>
       </a>
-    </div>
+    </div> -->
 
     <div class="separador">
       <button class="btn btn-dark" @click="principal">Volver</button>
@@ -57,16 +66,25 @@
 
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
 
+
+import axios from "axios";
+import ProyectosApp from '../components/ProyectosApp.vue'
+import { mapGetters } from 'vuex';
 export default {
   name: "Tienda",
-  components: {
-    HelloWorld,
-  },
 
+  components: {
+      ProyectosApp,
+  },
+  computed:{
+    ...mapGetters({ listaProyectos: "getProyectos" }),
+
+},
   data() {
     return {
+      /* proyectos: this.$store.state.proyectos, */
+      url: "https://618194d132c9e2001780488e.mockapi.io/api/products",
       titulo: "Tienda",
       subtitulo: "Descubri todo lo que tenemos",
       check: [],
@@ -88,9 +106,19 @@ export default {
     buscar() {
       this.$router.push("/resultado");
     },
+    /* async getProyectos(){
+      const datos = await axios.get(this.url)
+      this.proyectos = datos.data
+      console.log(datos.data)
+    } */
   },
+  /* created(){
+    this.getProyectos()
+  } */
+
 };
 </script>
+
 <style scoped>
 .pos {
   position: FIXED;

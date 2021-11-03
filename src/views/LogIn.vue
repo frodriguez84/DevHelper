@@ -52,13 +52,11 @@ export default {
   name: "Login",
 
   computed: {
-    
-    
+      
   },
 
   data() {
     return {
-      listaUsuarios: null,
       
     };
   },
@@ -88,7 +86,6 @@ export default {
   async mounted() {
     let url = "https://6180891b8bfae60017adfb16.mockapi.io/api/users";
     let response = await axios.get(url);
-    //console.log(response.data)
     this.listaUsuarios = response.data;
     console.log(this.listaUsuarios);
   },

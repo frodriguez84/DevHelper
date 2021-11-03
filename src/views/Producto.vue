@@ -65,12 +65,12 @@
 
 <script>
 
-import HelloWorld from "@/components/HelloWorld.vue";
+
 
 export default {
   name: "Producto",
   components: {
-    HelloWorld,
+    
   },
 
   data() {
