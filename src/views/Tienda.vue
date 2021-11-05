@@ -29,13 +29,13 @@
     <!-- <div id="carouselExampleControls" class="pos" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
+          <img class="d-block w-50" src="../img/Monkey.jpg" alt="" />
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/bdg.jpg" alt="" />
+          <img class="d-block w-50" src="../img/bdg.jpg" alt="" />
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="../img/Monkey.jpg" alt="" />
+          <img class="d-block w-50" src="../img/Monkey.jpg" alt="" />
         </div>
       </div>
       <a

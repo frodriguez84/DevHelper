@@ -46,6 +46,7 @@
 
 
 <script>
+
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
@@ -80,7 +81,6 @@ export default {
         alert("Usuario o clave incorrecta");
       }  
       this.$store.state.userSeleccionado = u
-      
     },
   },
   async mounted() {

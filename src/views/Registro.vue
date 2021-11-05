@@ -1,5 +1,5 @@
 <template>
-  <div> Usuarios: {{ listaUsuarios }}
+  <div> <!-- Usuarios: {{ listaUsuarios }} -->
     <AgregarUsuario />
     
   </div>

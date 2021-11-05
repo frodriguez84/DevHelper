@@ -67,7 +67,7 @@ export default new Vuex.Store({
     },
     filteredProyects(state) {
       if (state.filter.query.length > 2) {
-        let proyectos = state.proyectos.filter(p => p.disponible === state.filter.disponible)
+        var proyectos = state.proyectos.filter(p => p.disponible === state.filter.disponible)
         return proyectos.filter(p => p.titulo.toLowerCase().includes(state.filter.query));
       }
       return proyectos;

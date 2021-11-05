@@ -3,7 +3,7 @@
         <h1 class="text-center text-muted">Buscador</h1>
         <Buscador></Buscador>
         <hr />
-        <proyectos-list></proyectos-list>
+        <Proyectos-list></Proyectos-list>
     </div>
 </template>
 
