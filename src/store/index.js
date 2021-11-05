@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userSeleccionado: null,
     listaUsuarios: [],
     proyectos: [],
+    url: "https://6180891b8bfae60017adfb16.mockapi.io/api/users",
     url: "https://618194d132c9e2001780488e.mockapi.io/api/products",
     filter: {
       query: '',
@@ -33,7 +34,9 @@ export default new Vuex.Store({
       state.listaUsuarios.push(usuario);
     },
     SET_QUERY(state, query) {
+
       state.filter.query = query;
+
     },
     SET_DISPONIBLE(state) {
       state.filter.disponible = !state.filter.disponible;
@@ -42,6 +45,9 @@ export default new Vuex.Store({
     llenarProyectos: (state, proyectos) => {
       state.proyectos = proyectos
     },
+    llenarUsuarios: (state, usuarios) =>{
+      state.usuarios = usuarios
+    }
 
   },
   actions: {
@@ -57,14 +63,15 @@ export default new Vuex.Store({
     llenarProyectos: ({ commit }, proyectos) => {
       commit('llenarProyectos', proyectos)
     },
+    llenarUsuarios: ({ commit }, usuarios) =>{
+      commit('llenarUsuarios', usuarios)
+    }
 
   },
   modules: {
   },
   getters: {
-    getUsuarios: (state) => {
-      return state.listaUsuarios;
-    },
+    
     filteredProyects(state) {
       if (state.filter.query.length > 2) {
         var proyectos = state.proyectos.filter(p => p.disponible === state.filter.disponible)
@@ -74,6 +81,9 @@ export default new Vuex.Store({
     },
     getProyectos: (state) => {
       return state.proyectos
+    },
+    getUsuarios: (state) => {
+      return state.usuarios;
     },
   },
 

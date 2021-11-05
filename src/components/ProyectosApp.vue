@@ -1,9 +1,9 @@
 <template>
     <div>
         <h1 class="text-center text-muted">Buscador</h1>
-        <Buscador></Buscador>
+        <buscador></buscador>
         <hr />
-        <Proyectos-list></Proyectos-list>
+        <proyectos-list></proyectos-list>
     </div>
 </template>
 

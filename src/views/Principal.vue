@@ -4,6 +4,8 @@
       <h1>{{ titulo }}</h1>
       <p>Aca estaria la lista de todos los proyectos que se cargan</p>
 
+      <button @click="push">pusheame</button>
+
       <div class="d-flex">
         <input
           v-model="proyectoNuevo"
@@ -77,7 +79,6 @@
             <td>
               <div><button @click="producto">Ver</button> <span></span></div>
             </td>
-   
           </tr>
         </tbody>
       </table>
@@ -101,13 +102,10 @@
 
 
 <script>
-
-
+import axios from 'axios'
 export default {
   name: "Principal",
-  components: {
-    
-  },
+  components: {},
 
   data() {
     return {
@@ -151,6 +149,7 @@ export default {
           nombre: this.proyectoNuevo,
           estado: "reclutando",
           genero: "A determinar",
+          monto: 50,
         });
       } else {
         this.proyectos[this.proyectoEditado].nombre = this.proyectoNuevo;
@@ -158,6 +157,17 @@ export default {
       }
 
       this.proyectoNuevo = "";
+    },
+
+    push() {
+      console.log("arranca");
+      axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
+        titulo: "hola",
+        disponible: "reclutando",
+        genero: "A determinar",
+        monto: 50,
+      });
+      console.log("termina");
     },
 
     borrarProyecto(index) {

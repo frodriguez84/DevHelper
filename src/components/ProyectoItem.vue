@@ -1,29 +1,26 @@
 <template>
   <div class="col-sm-6 mb-3">
-    <div class="card">
+    <div class="card" style="width: 27rem;">
       <div class="card-header">
-        <h5 class="card-title">{{ proyecto.titulo }}</h5>
-        <div v-if="proyecto.disponible">
-          <h6 class="card-subtitule">Proyecto disponible</h6>
-        </div>
-        <div v-else>
-          <h6 class="card-subtitule">Proyecto no disponible</h6>
-        </div>
+        <img class="card-img-top" src="" alt="">
+        <h5 class="card-title">Titulo: {{ proyecto.titulo }}</h5>
+        <h6 class="card-subtitule">Disponible: {{ proyecto.disponible }}</h6>
       </div>
       <div class="card-body">
-        <p class="card-text">{{ proyecto.genero }}</p>
-        <p class="card-text">{{ proyecto.monto }}</p>
+        <p class="card-text">Genero: {{ proyecto.genero }}</p>
+        <p class="card-text">Monto: ${{ proyecto.monto }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import mapGetters from 'vuex'
 export default {
   props: {
     proyecto: {
       type: Object,
-      required: true
+      required: true,
     },
   },
 };

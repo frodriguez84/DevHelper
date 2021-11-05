@@ -3,7 +3,7 @@
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->
-        
+
         <!-- Icon -->
         <div class="fadeIn first">
           <img src="@/assets/logo.png" id="icon" alt="User Icon" />
@@ -46,20 +46,17 @@
 
 
 <script>
-
 import { mapGetters } from "vuex";
 import axios from "axios";
 export default {
   name: "Login",
 
   computed: {
-      
+    ...mapGetters({ usuarios: "getUsuarios" }),
   },
 
   data() {
-    return {
-      
-    };
+    return {};
   },
 
   methods: {
@@ -69,25 +66,20 @@ export default {
     principal() {
       this.$router.push("/principal");
     },
-   
+
     validation(nombre, clave) {
+      const u = this.usuarios.find(
+        (usuario) => usuario.nombre == nombre && usuario.password == clave
+      );
 
-      const u = this.listaUsuarios.find(usuario => usuario.nombre == nombre && usuario.password == clave);
-
-      if(u){
+      if (u) {
         this.principal();
         this.$store.dispatch("setAuthAction");
-      }else{
+      } else {
         alert("Usuario o clave incorrecta");
-      }  
-      this.$store.state.userSeleccionado = u
+      }
+      this.$store.state.userSeleccionado = u;
     },
-  },
-  async mounted() {
-    let url = "https://6180891b8bfae60017adfb16.mockapi.io/api/users";
-    let response = await axios.get(url);
-    this.listaUsuarios = response.data;
-    console.log(this.listaUsuarios);
   },
 };
 </script>

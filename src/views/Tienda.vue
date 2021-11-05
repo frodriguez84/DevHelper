@@ -58,7 +58,7 @@
       </a>
     </div> -->
 
-    <div class="separador">
+    <div class="">
       <button class="btn btn-dark" @click="principal">Volver</button>
     </div>
   </div>
