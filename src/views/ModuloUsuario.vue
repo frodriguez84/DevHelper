@@ -1,88 +1,82 @@
 <template>
   <div class="container">
-    <h1>Modulo del usuario: {{ this.$store.state.userSeleccionado.nombre }}</h1>
+    <h1 class="text-warning">
+      Modulo del usuario: {{ usuarioLogeado.nombre }}
+    </h1>
     <div>
-      <h4>Proyectos DEV</h4>
+      <h4>Proyectos colaborando como DEV</h4>
     </div>
 
-    <table class="table table-danger">
+    <table class="table table-success">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Genero</th>
+          <th scope="col">Monto</th>
           <th scope="col">Creador</th>
-          <th scope="col">Presupuesto necesario</th>
-          <th scope="col">Ver</th>
+          <th scope="col">Borrar</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mario Kart</td>
-          <td>Otto</td>
-          <td>$ 1000</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Baldur's Gate 3</td>
-          <td>Larian</td>
-          <td>$ 1500</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Lineage 2</td>
-          <td>the Bird</td>
-          <td>$ 950</td>
-          <td><button @click="producto">Ver</button></td>
+        <tr v-for="p in usuarioLogeado.proyectosDev" :key="p.id">
+          <td>
+            <span>{{ p.titulo }}</span>
+          </td>
+          <td>
+            <span>{{ p.genero }}</span>
+          </td>
+          <td>
+            <span>${{ p.monto }}</span>
+          </td>
+          <td>
+            <span>{{ p.creador }}</span>
+          </td>
+          <td>
+            <div class="text-center" @click="borrar(p.id)">
+              <button class="btn btn-danger">Borrar</button>
+              <span class="fa fa-trash"></span>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
 
     <div>
-      <h4>Proyectos PATROCINADOR</h4>
+      <h4>Proyectos colaborando como PATROCINADOR</h4>
     </div>
-
-    <table class="table table-info">
+    <table class="table table-secondary">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Genero</th>
+          <th scope="col">Monto</th>
           <th scope="col">Creador</th>
-          <th scope="col">Presupuesto necesario</th>
-          <th scope="col">Mi aporte</th>
-          <th scope="col">Ver</th>
+          <th scope="col">Mi patrocinio</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Icewind Dale 2</td>
-          <td>Phil_4char</td>
-          <td>$ 975</td>
-          <td>$ 250</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Neverwinger Nights 2</td>
-          <td>Nvidia</td>
-          <td>$ 1800</td>
-          <td>$ 350</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Warcraft 4</td>
-          <td>Blizzard</td>
-          <td>$ 9800</td>
-          <td>$ 110</td>
-          <td><button @click="producto">Ver</button></td>
+        <tr v-for="p in usuarioLogeado.proyectosPat" :key="p.id">
+          <td>
+            <span>{{ p.titulo }}</span>
+          </td>
+          <td>
+            <span>{{ p.genero }}</span>
+          </td>
+          <td>
+            <span>${{ p.monto }}</span>
+          </td>
+          <td>
+            <span>{{ p.creador }}</span>
+          </td>
+          <td>
+            <span>{{ monto }}</span>
+          </td>
         </tr>
       </tbody>
     </table>
-
+    <button>Patrocinar</button>
+    <input v-model="monto" type="text" />
+    <hr />
     <div>
       <button class="btn btn-dark" @click="tienda">Volver</button>
     </div>
@@ -90,18 +84,20 @@
 </template>
 
 <script>
-
-
+import { mapGetters } from "vuex";
 export default {
   name: "ModuloUsuario",
-  components: {
-    
-    
+  components: {},
+
+  computed: {
+    ...mapGetters({ listaProyectos: "getProyectos" }),
+    ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
   },
 
   data() {
     return {
-      usuario: this.$store.state.usuarios[0].nombre,
+      monto: 0,
     };
   },
 
@@ -112,8 +108,9 @@ export default {
     producto() {
       this.$router.push("/producto");
     },
-
-
+    borrarDev(index) {
+      this.usuarioLogeado.proyectosDev.splice(index, 1);
+    },
   },
 };
 </script>

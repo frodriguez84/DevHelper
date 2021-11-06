@@ -18,6 +18,7 @@
             class="fadeIn second"
             name="user"
             placeholder="Usuario"
+           
           />
           <input
             v-model="clave"
@@ -26,6 +27,7 @@
             class="fadeIn third"
             name="password"
             placeholder="Password"
+            
           />
           <input
             type="button"

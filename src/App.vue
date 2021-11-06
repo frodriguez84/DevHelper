@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <b-navbar-toogle target="nav_collapse"></b-navbar-toogle>
@@ -56,7 +57,7 @@
       </b-container>
     </b-navbar>
     <router-view />
-    <footer class="sticky-footer">
+    <footer class="sticky-footer mb-0">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
           <span>Copyright © DevHelper 2021</span>

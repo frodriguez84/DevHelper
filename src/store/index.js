@@ -85,6 +85,9 @@ export default new Vuex.Store({
     getUsuarios: (state) => {
       return state.usuarios;
     },
+    getUsuarioLogeado:(state)=>{
+      return state.userSeleccionado
+    }
   },
 
 })

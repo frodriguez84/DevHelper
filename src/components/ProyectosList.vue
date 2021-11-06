@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" >
     <div class="row" v-if="proyectos.length > 0">
       <div class="alert alert-success">
         Se encontraron: {{ proyectos.length }} proyectos

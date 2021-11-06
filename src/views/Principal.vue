@@ -2,20 +2,22 @@
   <div>
     <div class="container">
       <h1>{{ titulo }}</h1>
-      <p>Aca estaria la lista de todos los proyectos que se cargan</p>
-
+      
       <div class="d-flex">
-        <input
+        <input id="ingresoT"
           v-model="proyectoNuevo.titulo" type="text" placeholder="Ingresar titulo" class="form-control"
           @keyup.enter="agregarProyecto" />
 
-        <input   v-model="proyectoNuevo.genero"  type="text" placeholder="Ingresar genero"
-          class="form-control"  @keyup.enter="agregarProyecto"   />
+        <input id="ingresoG" v-model="proyectoNuevo.genero"  type="text" placeholder="Ingresar genero"
+          class="form-control" @keyup.enter="agregarProyecto"   />
+
+          <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
+          class="form-control" @keyup.enter="agregarProyecto"   />
        
-        <input v-model.number="proyectoNuevo.monto" type="number"  placeholder="Ingresar el monto"  class="form-control"
+        <input id="ingresoM" v-model.number="proyectoNuevo.monto" type="number"  placeholder="Ingresar el monto"  class="form-control"
           @keyup.enter="agregarProyecto" />
 
-        <button @click="push" class="btn btn-warning rounded-0"> Crear Proyecto</button>
+        <button @click="push" class="btn btn-success rounded-0"> Crear Proyecto</button>
       </div>
       <table class="table table-bordered mt-5">
         <thead>
@@ -24,6 +26,7 @@
             <th scope="col">Disponible</th>
             <th scope="col">Genero</th>
             <th scope="col">Monto</th>
+            <th scope="col">Creador</th>
             <th scope="col" class="text-center">Editar</th>
             <th scope="col" class="text-center">Borrar</th>
             <th scope="col">Quiero Desarrollar</th>
@@ -51,86 +54,41 @@
               <span>${{p.monto}}</span>
             </td>
             <td>
+              <span>{{p.creador}}</span>
+            </td>
+            <td>
               <div class="text-center" @click="editarProyecto(index)">
-                <button>
+                <button class="btn btn-warning">
                   Editar
-                  <span class="fa fa-pen"></span>
+                  <span ></span>
                 </button>
               </div>
             </td>
             <td>
               <div class="text-center" @click="borrarProyecto(p.id)">
-                <button>Borrar</button>
+                <button class="btn btn-danger">Borrar</button>
                 <span class="fa fa-trash"></span>
               </div>
             </td>
             <td>
-              <div><button @click="addProyect">Dev</button> <span></span></div>
+              <div><button @click="agregarProyectoDev(p.id)" class="btn btn-dark text-center">Dev</button> <span></span></div>
             </td>
             <div>
-              <button @click="addProyect">Patrocinar</button> <span></span>
+              <button @click="agregarProyectoPat(p.id)" class="btn btn-dark text-center">Patrocinar</button> <span></span>
             </div>
             <td>
-              <div><button @click="producto">Ver</button> <span></span></div>
+              <div><button @click="producto" class="btn btn-primary text-center">Ver</button> <span></span></div>
             </td>
-
-
-            <!-- <td>
-              <span :class="{ finalizado: p.disponible === 'finalizado' }">{{
-                firstCharUpper(p.titulo)
-              }}</span>
-            
-            <td style="width: 120px">
-              <span
-                @click="cambiarEstado(index)"
-                class="pointer"
-                :class="{
-                  'text-danger': p.disponible === 'reclutando',
-                  'text-warning': p.disponible === 'en progreso',
-                  'text-success': p.disponible === 'finalizado',
-                }"
-              >
-                {{ firstCharUpper(p.disponible) }}
-              </span>
-            </td>
-            <td>
-              <span @click="cambiarGenero(index)">
-                {{ firstCharUpper(p.genero) }}
-              </span>
-            </td>
-            <td>
-              <div class="text-center" @click="editarProyecto(index)">
-                <button>
-                  Editar
-                  <span class="fa fa-pen"></span>
-                </button>
-              </div>
-            </td>
-            <td>
-              <div class="text-center" @click="borrarProyecto(index)">
-                <button>Borrar</button>
-                <span class="fa fa-trash"></span>
-              </div>
-            </td>
-            <td>
-              <div><button @click="addProyect">Dev</button> <span></span></div>
-            </td>
-            <div>
-              <button @click="addProyect">Patrocinar</button> <span></span>
-            </div>
-            <td>
-              <div><button @click="producto">Ver</button> <span></span></div>
-            </td> -->
           </tr>
         </tbody>
       </table>
       <hr />
       <div>
-        <button class="btn btn-dark" @click="logout">Logout</button>
+        <button class="btn btn-danger" @click="logout">Logout</button>
       </div>
       <br />
       <div>
-        <button @click="buscar" class="btn btn-dark">Buscar proyecto</button>
+        <button @click="buscar" class="btn btn-success">Buscar proyecto</button>
       </div>
       <br />
       <div>
@@ -151,6 +109,8 @@ export default {
   components: {},
   computed:{
     ...mapGetters({ listaProyectos: "getProyectos" }),
+    ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" })
   },
   data() {
     return {
@@ -159,6 +119,9 @@ export default {
         disponible: true,
         genero: "",
         monto: 0,
+        creador: "",
+        
+        
 
       },
       proyectoEditado: null,
@@ -166,7 +129,7 @@ export default {
       proyectos: [],
       estados: ["reclutando", "en progreso", "finalizado"],
       generos: ["Rol", "Rpg", "Accion", "Aventura", "Deportes", "Estrategia"],
-      msj: "Proyecto agregado, porfavor visite su modulo para ver mas detalles",
+      msj: "Porfavor visite su modulo para ver mas detalles",
     };
   },
 
@@ -192,33 +155,61 @@ export default {
     moduloUsuario() {
       this.$router.push("/modulo_usuario");
     },
-    /* agregarProyecto() {
-      if (this.proyectoNuevo.length === 0) return;
+   
+ async agregarProyectoDev(index){
+     const i = Number(index)
+     if(this.usuarioLogeado !== null){
+       try {
+         const proyecto = await axios.get(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
+          if(proyecto.data.disponible){
 
-      if (this.proyectoEditado === null) {
-        this.proyectos.push({
-          nombre: this.proyectoNuevo,
-          estado: "reclutando",
-          genero: "A determinar",
-          monto: 50,
-        });
-      } else {
-        this.proyectos[this.proyectoEditado].nombre = this.proyectoNuevo;
-        this.proyectoEditado = null;
-      }
+            this.usuarioLogeado.proyectosDev.push(proyecto.data) 
+            alert("Proyecto guardado en lista DEV")
+            this.addProyect()
+          } else{
+            alert("Proyecto no disponible")
+          }
 
-      this.proyectoNuevo = "";
-    }, */
+       } catch (error) {
+         console.log(error, "No se puedo agregar")
+       }
+     }
+   },
+   async agregarProyectoPat(index){
+     const i = Number(index)
+     if(this.usuarioLogeado !== null){
+
+       try {
+         const proyecto = await axios.get(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
+        console.log(proyecto.data.disponible)
+
+        if(proyecto.data.disponible){
+
+           this.usuarioLogeado.proyectosPat.push(proyecto.data) 
+           alert("Proyecto guardado en lista PAT")
+           this.addProyect()
+        } else {
+          alert("Proyecto no disponible")
+        }
+
+         
+       } catch (error) {
+         console.log(error, "No se puedo agregar")
+       }
+     }
+   },
 
    async push() {
       console.log("arranca");
-      if(this.proyectoNuevo.titulo !== "" && this.proyectoNuevo.genero !== "" && Number(this.proyectoNuevo.monto) > 0){
+      if(this.proyectoNuevo.titulo !== "" && this.proyectoNuevo.genero !== "" 
+      && Number(this.proyectoNuevo.monto) > 0 && this.proyectoNuevo.creador !== ""){
         
        await axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
           titulo: this.proyectoNuevo.titulo,
           disponible: this.proyectoNuevo.disponible,
           genero: this.proyectoNuevo.genero,
           monto: Number(this.proyectoNuevo.monto),
+          creador: this.proyectoNuevo.creador
         },
           alert("Envio exitoso"),
           console.log("termina")
@@ -227,22 +218,26 @@ export default {
         alert("Complete todos los campos")
         console.log("Fallo en el envio");
       }
-      this.proyectoNuevo.titulo = ""
-      this.proyectoNuevo.genero = ""
-      this.proyectoNuevo.monto = 0
+      this.limpiarCampos()
+    },
+
+    limpiarCampos(){
+      document.getElementById("ingresoT").value=""
+      document.getElementById("ingresoG").value=""
+      document.getElementById("ingresoM").value=""
+      document.getElementById("ingresoC").value=""
+
     },
 
   async borrarProyecto(index) {
 
     const i = Number(index)
     try {
-      await axios.delete(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
+      const proyecto = await axios.delete(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
       alert('El proyecto fue borrado')
     } catch (error) {
       console.log(error, "error al borrar")
     }
-
-      /* this.listaProyectos.splice(index, 1); */
     },
 
     editarProyecto(index) {

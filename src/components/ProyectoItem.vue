@@ -1,6 +1,6 @@
 <template>
-  <div class="col-sm-6 mb-3">
-    <div class="card" style="width: 27rem;">
+  <div class="col-sm-6 mb-3 centro">
+    <div class="card" >
       <div class="card-header">
         <img class="card-img-top" src="" alt="">
         <h5 class="card-title">Titulo: {{ proyecto.titulo }}</h5>
@@ -25,5 +25,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+.card{
+  
+  margin: 0 auto !important;
+  margin-left: 2em;
+}
+.card:hover{
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+}
+</style>
 
 

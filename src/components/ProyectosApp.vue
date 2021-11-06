@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <h1 class="text-center text-muted">Buscador</h1>
+    <div class="busca">
+        <h1 class="text-center text-muted mt-3">Buscador</h1>
         <buscador></buscador>
         <hr />
         <proyectos-list></proyectos-list>
@@ -18,3 +18,17 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.busca{
+    border: rgba(0, 0, 0, 0.5) solid 1px;
+    margin: 0.5em;
+    border-radius: 10px;
+    padding: 2em;
+    
+    
+}
+.footer.sticky-footer{
+    position: relative;
+}
+</style>
