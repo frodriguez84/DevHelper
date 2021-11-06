@@ -101,16 +101,14 @@ export default {
     ...mapActions("llenarProyectos"),
     ...mapActions("llenarUsuarios"),
   },
-  created() {
-    axios.get(this.url2).then((result) => {
-      this.$store.dispatch("llenarUsuarios", result.data)
+  async created() {
+    await axios.get(this.url2).then((result) => {
+      this.$store.dispatch("llenarUsuarios", result.data);
     }),
-
-    axios.get(this.url).then((result) => {
-      this.$store.dispatch("llenarProyectos", result.data);
-    });
+      await axios.get(this.url).then((result) => {
+        this.$store.dispatch("llenarProyectos", result.data);
+      });
   },
-  
 };
 </script>
 

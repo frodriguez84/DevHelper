@@ -4,26 +4,26 @@
       <h1>{{ titulo }}</h1>
       <p>Aca estaria la lista de todos los proyectos que se cargan</p>
 
-      <button @click="push">pusheame</button>
-
       <div class="d-flex">
         <input
-          v-model="proyectoNuevo"
-          type="text"
-          placeholder="Ingresar nuevo proyecto"
-          class="form-control"
-          @keyup.enter="agregarProyecto"
-        />
-        <button @click="agregarProyecto" class="btn btn-warning rounded-0">
-          Nuevo Proyecto
-        </button>
+          v-model="proyectoNuevo.titulo" type="text" placeholder="Ingresar titulo" class="form-control"
+          @keyup.enter="agregarProyecto" />
+
+        <input   v-model="proyectoNuevo.genero"  type="text" placeholder="Ingresar genero"
+          class="form-control"  @keyup.enter="agregarProyecto"   />
+       
+        <input v-model.number="proyectoNuevo.monto" type="number"  placeholder="Ingresar el monto"  class="form-control"
+          @keyup.enter="agregarProyecto" />
+
+        <button @click="push" class="btn btn-warning rounded-0"> Crear Proyecto</button>
       </div>
       <table class="table table-bordered mt-5">
         <thead>
           <tr>
             <th scope="col">Titulo</th>
-            <th scope="col">Estado</th>
+            <th scope="col">Disponible</th>
             <th scope="col">Genero</th>
+            <th scope="col">Monto</th>
             <th scope="col" class="text-center">Editar</th>
             <th scope="col" class="text-center">Borrar</th>
             <th scope="col">Quiero Desarrollar</th>
@@ -32,23 +32,65 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(p, index) in proyectos" :key="index">
+          <tr v-for="(p, index) in listaProyectos" :key="index">
             <td>
-              <span :class="{ finalizado: p.estado === 'finalizado' }">{{
-                firstCharUpper(p.nombre)
-              }}</span>
+              <span>{{p.titulo}}</span>
             </td>
+            <div>
+             <td class="text-success" v-if="p.disponible">
+              <span >Juego disponible</span>
+            </td>
+            <td class="text-danger" v-else>
+              <span >Juego no disponible</span>
+            </td>
+            </div>            
+             <td>
+              <span>{{p.genero}}</span>
+            </td>
+            <td>
+              <span>${{p.monto}}</span>
+            </td>
+            <td>
+              <div class="text-center" @click="editarProyecto(index)">
+                <button>
+                  Editar
+                  <span class="fa fa-pen"></span>
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="text-center" @click="borrarProyecto(p.id)">
+                <button>Borrar</button>
+                <span class="fa fa-trash"></span>
+              </div>
+            </td>
+            <td>
+              <div><button @click="addProyect">Dev</button> <span></span></div>
+            </td>
+            <div>
+              <button @click="addProyect">Patrocinar</button> <span></span>
+            </div>
+            <td>
+              <div><button @click="producto">Ver</button> <span></span></div>
+            </td>
+
+
+            <!-- <td>
+              <span :class="{ finalizado: p.disponible === 'finalizado' }">{{
+                firstCharUpper(p.titulo)
+              }}</span>
+            
             <td style="width: 120px">
               <span
                 @click="cambiarEstado(index)"
                 class="pointer"
                 :class="{
-                  'text-danger': p.estado === 'reclutando',
-                  'text-warning': p.estado === 'en progreso',
-                  'text-success': p.estado === 'finalizado',
+                  'text-danger': p.disponible === 'reclutando',
+                  'text-warning': p.disponible === 'en progreso',
+                  'text-success': p.disponible === 'finalizado',
                 }"
               >
-                {{ firstCharUpper(p.estado) }}
+                {{ firstCharUpper(p.disponible) }}
               </span>
             </td>
             <td>
@@ -78,7 +120,7 @@
             </div>
             <td>
               <div><button @click="producto">Ver</button> <span></span></div>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
@@ -102,14 +144,23 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 import axios from 'axios'
 export default {
   name: "Principal",
   components: {},
-
+  computed:{
+    ...mapGetters({ listaProyectos: "getProyectos" }),
+  },
   data() {
     return {
-      proyectoNuevo: "",
+      proyectoNuevo: {
+        titulo: "",
+        disponible: true,
+        genero: "",
+        monto: 0,
+
+      },
       proyectoEditado: null,
       titulo: "Pagina Principal",
       proyectos: [],
@@ -141,7 +192,7 @@ export default {
     moduloUsuario() {
       this.$router.push("/modulo_usuario");
     },
-    agregarProyecto() {
+    /* agregarProyecto() {
       if (this.proyectoNuevo.length === 0) return;
 
       if (this.proyectoEditado === null) {
@@ -157,21 +208,41 @@ export default {
       }
 
       this.proyectoNuevo = "";
-    },
+    }, */
 
-    push() {
+   async push() {
       console.log("arranca");
-      axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
-        titulo: "hola",
-        disponible: "reclutando",
-        genero: "A determinar",
-        monto: 50,
-      });
-      console.log("termina");
+      if(this.proyectoNuevo.titulo !== "" && this.proyectoNuevo.genero !== "" && Number(this.proyectoNuevo.monto) > 0){
+        
+       await axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
+          titulo: this.proyectoNuevo.titulo,
+          disponible: this.proyectoNuevo.disponible,
+          genero: this.proyectoNuevo.genero,
+          monto: Number(this.proyectoNuevo.monto),
+        },
+          alert("Envio exitoso"),
+          console.log("termina")
+        );
+      } else{
+        alert("Complete todos los campos")
+        console.log("Fallo en el envio");
+      }
+      this.proyectoNuevo.titulo = ""
+      this.proyectoNuevo.genero = ""
+      this.proyectoNuevo.monto = 0
     },
 
-    borrarProyecto(index) {
-      this.proyectos.splice(index, 1);
+  async borrarProyecto(index) {
+
+    const i = Number(index)
+    try {
+      await axios.delete(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
+      alert('El proyecto fue borrado')
+    } catch (error) {
+      console.log(error, "error al borrar")
+    }
+
+      /* this.listaProyectos.splice(index, 1); */
     },
 
     editarProyecto(index) {
