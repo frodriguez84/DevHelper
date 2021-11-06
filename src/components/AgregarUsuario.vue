@@ -12,7 +12,7 @@
                     ><i class="fa fa-user"> </i
                   ></span>
                   <input
-                    v-model="nombre"
+                    v-model="usuarioNuevo.nombre"
                     type="text"
                     class="form-control"
                     placeholder="Nombre"
@@ -25,8 +25,8 @@
                     ><i class="fa fa-envelope"> </i
                   ></span>
                   <input
-                    v-model="email"
-                    type="email"
+                    v-model="usuarioNuevo.email"
+                    type="text"
                     class="form-control"
                     placeholder="Email"
                   />
@@ -38,8 +38,8 @@
                     ><i class="fa fa-key"> </i
                   ></span>
                   <input
-                    v-model="password"
-                    type="password"
+                    v-model="usuarioNuevo.password"
+                    type="text"
                     class="form-control"
                     placeholder="Password"
                   />
@@ -51,27 +51,15 @@
                     ><i class="fa fa-key"> </i
                   ></span>
                   <input
-                    v-model="password2"
-                    type="password"
+                    v-model="usuarioNuevo.password2"
+                    type="text"
                     class="form-control"
                     placeholder="Confirmar Password"
                   />
                 </div>
               </div>
-              <button
-                @click="
-                  agregarUsuario({
-                    nombre: nombre,
-                    clave: password,
-                    clave2: password2,
-                    email: email,
-                  })
-                "
-                type="button"
-                class="btn btn-success btn-block"
-              >
-                Submit
-              </button>
+              <button @click="addUsuario()" type="button" class="btn btn-success btn-block" >
+                Submit </button>
             </form>
             <br />
             <button @click="login" class="btn btn-dark">Logeate</button>
@@ -83,12 +71,32 @@
 </template>
 
 <script >
+import axios from 'axios'
 import { mapActions } from "vuex";
-
+import { mapGetters } from 'vuex';
 export default {
+  computed:{
+    ...mapGetters({ listaProyectos: "getProyectos" }),
+    ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" })
+  },
+
+  data(){
+    return{
+      usuarioNuevo:{
+        nombre: "" ,
+        email: "",
+        password: "",
+        password2: "",
+        proyectosDev:[],
+        proyectosPat:[],
+      }
+    }
+  },
+
   methods: {
     ...mapActions("agregarUsuario"),
-    agregarUsuario(usuario) {
+    /* agregarUsuario(usuario) {
       if (usuario.clave !== usuario.clave2) {
         alert("Los password deben ser iguales");
       } else {
@@ -97,10 +105,47 @@ export default {
         alert("Usuario " + usuario.nombre + " creado \nPor favor logeese" )
         this.$router.push("/login");
       }
-    },
+    }, */
     login() {
         this.$router.push("/login");
     },
+
+    validaPassword(){
+      if(this.usuarioNuevo.password === this.usuarioNuevo.password2){
+        alert("Los passwords deben ser iguales")
+      }
+    },
+
+
+    async addUsuario(){
+
+      console.log("arranca");
+      if( this.usuarioNuevo.nombre !== "" && this.usuarioNuevo.email !== "" 
+      && this.usuarioNuevo.password !== "" && this.usuarioNuevo.password2 !== ""){
+
+        try {
+          
+          await axios.post("https://6180891b8bfae60017adfb16.mockapi.io/api/users", {
+             nombre: this.usuarioNuevo.nombre,
+             email: this.usuarioNuevo.email,
+             password: this.usuarioNuevo.password,
+             proyectosDev: this.usuarioNuevo.proyectosDev,
+             proyectosPat: this.usuarioNuevo.proyectosPat,
+           },
+             alert("Usuario creado correctamente"),
+             console.log("termina")
+           );
+
+        } catch (error) {
+          console.log(error, "No se agrego")
+        }
+
+
+      } else{
+        alert("Complete todos los campos")
+        console.log("Campos invalidos");
+      }
+    }
     
   },
 };

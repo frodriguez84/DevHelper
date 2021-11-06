@@ -30,14 +30,13 @@ export default new Vuex.Store({
       state.auth = !this.auth
     },
 
-    agregarUsuario: (state, usuario) => {
+    /* agregarUsuario: (state, usuario) => {
       state.listaUsuarios.push(usuario);
-    },
+    }, */
     SET_QUERY(state, query) {
-
       state.filter.query = query;
-
     },
+
     SET_DISPONIBLE(state) {
       state.filter.disponible = !state.filter.disponible;
     },
@@ -45,16 +44,17 @@ export default new Vuex.Store({
     llenarProyectos: (state, proyectos) => {
       state.proyectos = proyectos
     },
+
     llenarUsuarios: (state, usuarios) =>{
       state.usuarios = usuarios
-    }
+    },
 
   },
   actions: {
 
-    agregarUsuario: ({ commit }, usuario) => {
+    /* agregarUsuario: ({ commit }, usuario) => {
       commit("agregarUsuario", usuario);
-    },
+    }, */
 
     setAuthAction(context) {
       context.commit('setAuth')
