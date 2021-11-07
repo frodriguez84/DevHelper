@@ -92,6 +92,8 @@ body {
 }
 .container{
   border: solid green 1px;
+  margin-bottom: 100px;
+  
 }
 .centrado{
   border: solid blue 1px;

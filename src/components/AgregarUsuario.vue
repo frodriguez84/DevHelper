@@ -133,6 +133,7 @@ export default {
              proyectosPat: this.usuarioNuevo.proyectosPat,
            },
              alert("Usuario creado correctamente"),
+             
              console.log("termina")
            );
 
@@ -145,6 +146,7 @@ export default {
         alert("Complete todos los campos")
         console.log("Campos invalidos");
       }
+      login()
     }
     
   },

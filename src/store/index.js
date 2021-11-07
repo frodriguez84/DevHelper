@@ -27,7 +27,7 @@ export default new Vuex.Store({
 
   mutations: {
     setAuth(state) {
-      state.auth = !this.auth
+      state.auth = !state.auth
     },
 
     /* agregarUsuario: (state, usuario) => {

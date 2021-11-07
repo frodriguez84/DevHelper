@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-container>
         <b-navbar-toogle target="nav_collapse"></b-navbar-toogle>
@@ -38,6 +37,7 @@
                 >Modulo Usuario</b-nav-item
               >
             </template>
+
             <template v-else>
               <b-nav-item :to="{ name: 'Login' }" active-class="active" exact
                 >Login</b-nav-item
@@ -45,28 +45,37 @@
               <b-nav-item :to="{ name: 'Registro' }" active-class="active" exact
                 >Registro</b-nav-item
               >
+
+              <b-nav-item
+                :to="{ name: 'Principal' }"
+                active-class="active"
+                exact
+                >Principal</b-nav-item
+              >
+
               <b-nav-item :to="{ name: 'Tienda' }" active-class="active" exact
                 >Tienda</b-nav-item
               >
             </template>
           </b-navbar-nav>
           <b-navbar-nav>
-            <!-- <b-nav-item class="user">Bienvenido: {{usuarios.nombre}}</b-nav-item> -->
+            
           </b-navbar-nav>
         </b-collapse>
       </b-container>
     </b-navbar>
     <router-view />
-    <footer class="sticky-footer mb-0">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright © DevHelper 2021</span>
-        </div>
+    <template>
+      <div class="foot">
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © DevHelper 2021</span>
+            </div>
+          </div>
+        </footer>
       </div>
-    </footer>
-    <div>
-      <AgregarUsuario />
-    </div>
+    </template>
   </div>
 </template>
 
@@ -89,11 +98,14 @@ export default {
 
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
+
   },
   methods: {
     logout() {
-      if (this.$store.state.auth) {
+      if (this.usuarioLogeado.nombre !== undefined) {
         this.$store.state.auth = false;
+        this.usuarioLogeado.nombre = undefined
         this.$router.push("/");
       } else {
         this.$router.push("/");
@@ -134,20 +146,25 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-footer.sticky-footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
+
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+footer {
+  bottom: 0px !important;
+  /* position: absolute; */
+  margin-top: 8em;
   display: flex;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  background-color: dimgray;
+  align-items: center;
+   height: 100px;
+   background-color: rgba(0, 0, 0, 0.753);
 }
 
 footer.sticky-footer .copyright {
   line-height: 1;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   color: white;
 }
 

@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h1>{{ titulo }}</h1>
-      
+      <h1>{{ titulo }}</h1>     
       <div class="d-flex">
         <input id="ingresoT"
           v-model="proyectoNuevo.titulo" type="text" placeholder="Ingresar titulo" class="form-control"
@@ -11,13 +10,19 @@
         <input id="ingresoG" v-model="proyectoNuevo.genero"  type="text" placeholder="Ingresar genero"
           class="form-control" @keyup.enter="agregarProyecto"   />
 
-          <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
-          class="form-control" @keyup.enter="agregarProyecto"   />
+          <!-- <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
+          class="form-control" @keyup.enter="agregarProyecto"   /> -->
        
         <input id="ingresoM" v-model.number="proyectoNuevo.monto" type="number"  placeholder="Ingresar el monto"  class="form-control"
           @keyup.enter="agregarProyecto" />
 
-        <button @click="push" class="btn btn-success rounded-0"> Crear Proyecto</button>
+          <div v-if="this.usuarioLogeado.nombre === undefined">
+            <button  @click="login" class="btn btn-warning rounded-2"> Al Login</button>
+          </div>
+          <div v-else>
+          <button  @click="push" class="btn btn-success rounded-2"> Crear Proyecto</button>
+          </div>
+
       </div>
       <table class="table table-bordered mt-5">
         <thead>
@@ -110,7 +115,13 @@ export default {
   computed:{
     ...mapGetters({ listaProyectos: "getProyectos" }),
     ...mapGetters({ usuarios: "getUsuarios" }),
-    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" })
+    ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
+
+    logeado:{
+       set(){
+            this.$store.commit('setAuth');
+        }
+    }
   },
   data() {
     return {
@@ -120,9 +131,6 @@ export default {
         genero: "",
         monto: 0,
         creador: "",
-        
-        
-
       },
       proyectoEditado: null,
       titulo: "Pagina Principal",
@@ -134,15 +142,21 @@ export default {
   },
 
   methods: {
+    
     addProyect() {
       alert(this.msj);
     },
+    login(){
+      this.$router.push("/");
+    },
     logout() {
-      if (this.$store.state.auth) {
+      if (this.usuarioLogeado.nombre !== undefined) {
         this.$store.state.auth = false;
-
+        this.usuarioLogeado.nombre = undefined
+               
         this.$router.push("/");
       } else {
+        
         this.$router.push("/");
       }
     },
@@ -200,18 +214,19 @@ export default {
    },
 
    async push() {
+
       console.log("arranca");
       if(this.proyectoNuevo.titulo !== "" && this.proyectoNuevo.genero !== "" 
-      && Number(this.proyectoNuevo.monto) > 0 && this.proyectoNuevo.creador !== ""){
+      && Number(this.proyectoNuevo.monto) > 0 ){
         
        await axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
           titulo: this.proyectoNuevo.titulo,
           disponible: this.proyectoNuevo.disponible,
           genero: this.proyectoNuevo.genero,
           monto: Number(this.proyectoNuevo.monto),
-          creador: this.proyectoNuevo.creador
+          creador: this.usuarioLogeado.nombre,
         },
-          alert("Envio exitoso"),
+          alert("Proyecto creado"),
           console.log("termina")
         );
       } else{
@@ -269,5 +284,8 @@ export default {
 }
 .finalizado {
   text-decoration: line-through;
+}
+.form-control{
+  box-shadow: 0 30px 50px 0 rgba(151, 24, 24, 0.562);
 }
 </style>
