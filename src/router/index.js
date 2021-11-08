@@ -48,6 +48,11 @@ const routes = [
     name: 'ModuloUsuario',
     component: () => import(/* webpackChunkName: "about" */ '../views/ModuloUsuario.vue')
   },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Dashboard.vue')
+  },
  
 ]
 

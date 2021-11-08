@@ -15,6 +15,7 @@
           <th scope="col">Monto</th>
           <th scope="col">Creador</th>
           <th scope="col">Borrar</th>
+          <th scope="col">Ver</th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +38,9 @@
               <span class="fa fa-trash"></span>
             </div>
           </td>
+          <td>
+            <button class="btn btn-warning" @click="producto">Ver</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,9 +53,11 @@
         <tr>
           <th scope="col">Titulo</th>
           <th scope="col">Genero</th>
-          <th scope="col">Monto</th>
+          <th scope="col">Meta para desarrollo</th>
           <th scope="col">Creador</th>
-          <th scope="col">Mi patrocinio</th>
+          <th scope="col">Cuanto aportar?</th>
+          <th scope="col">Mi monto</th>
+          <th scope="col">Ver</th>
         </tr>
       </thead>
       <tbody>
@@ -69,13 +75,19 @@
             <span>{{ p.creador }}</span>
           </td>
           <td>
+            <input v-model="monto" type="number">
+            <button @click="aportar(p.id)">Patrocinar</button>
+          </td>
+          <td>
             <span>{{ monto }}</span>
+          </td>
+          <td>
+            <button class="btn btn-warning" @click="producto">Ver</button>         
           </td>
         </tr>
       </tbody>
     </table>
-    <button>Patrocinar</button>
-    <input v-model="monto" type="text" />
+    
     <hr />
     <div>
       <button class="btn btn-dark" @click="tienda">Volver</button>
@@ -111,8 +123,10 @@ export default {
     borrarDev(index) {
       this.usuarioLogeado.proyectosDev.splice(index, 1);
     },
+    aportar(index){
+
+    },
   },
 };
 </script>
-
 

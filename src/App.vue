@@ -36,6 +36,12 @@
                 exact
                 >Modulo Usuario</b-nav-item
               >
+              <b-nav-item
+                :to="{ name: 'Dashboard' }"
+                active-class="active"
+                exact
+                >Dashboard</b-nav-item
+              >
             </template>
 
             <template v-else>
@@ -55,6 +61,12 @@
 
               <b-nav-item :to="{ name: 'Tienda' }" active-class="active" exact
                 >Tienda</b-nav-item
+              >
+              <b-nav-item
+                :to="{ name: 'Dashboard' }"
+                active-class="active"
+                exact
+                >Dashboard</b-nav-item
               >
             </template>
           </b-navbar-nav>

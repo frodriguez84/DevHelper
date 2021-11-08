@@ -1,28 +1,49 @@
 <template>
   <div>
     <div class="container">
-      <h1>{{ titulo }}</h1>     
+      <h1>{{ titulo }}</h1>
+      <button @click="getUsuarioLogeado">prueba</button>
       <div class="d-flex">
-        <input id="ingresoT"
-          v-model="proyectoNuevo.titulo" type="text" placeholder="Ingresar titulo" class="form-control"
-          @keyup.enter="agregarProyecto" />
+        <input
+          id="ingresoT"
+          v-model="proyectoNuevo.titulo"
+          type="text"
+          placeholder="Ingresar titulo"
+          class="form-control"
+          @keyup.enter="agregarProyecto"
+        />
 
-        <input id="ingresoG" v-model="proyectoNuevo.genero"  type="text" placeholder="Ingresar genero"
-          class="form-control" @keyup.enter="agregarProyecto"   />
+        <input
+          id="ingresoG"
+          v-model="proyectoNuevo.genero"
+          type="text"
+          placeholder="Ingresar genero"
+          class="form-control"
+          @keyup.enter="agregarProyecto"
+        />
 
-          <!-- <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
+        <!-- <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
           class="form-control" @keyup.enter="agregarProyecto"   /> -->
-       
-        <input id="ingresoM" v-model.number="proyectoNuevo.monto" type="number"  placeholder="Ingresar el monto"  class="form-control"
-          @keyup.enter="agregarProyecto" />
 
-          <div v-if="this.usuarioLogeado.nombre === undefined">
-            <button  @click="login" class="btn btn-warning rounded-2"> Al Login</button>
-          </div>
-          <div v-else>
-          <button  @click="push" class="btn btn-success rounded-2"> Crear Proyecto</button>
-          </div>
+        <input
+          id="ingresoM"
+          v-model.number="proyectoNuevo.monto"
+          type="number"
+          placeholder="Ingresar el monto"
+          class="form-control"
+          @keyup.enter="agregarProyecto"
+        />
 
+        <div v-if="this.usuarioLogeado.nombre === undefined">
+          <button @click="login" class="btn btn-warning rounded-2">
+            Al Login
+          </button>
+        </div>
+        <div v-else>
+          <button @click="push" class="btn btn-success rounded-2">
+            Crear Proyecto
+          </button>
+        </div>
       </div>
       <table class="table table-bordered mt-5">
         <thead>
@@ -42,30 +63,30 @@
         <tbody>
           <tr v-for="(p, index) in listaProyectos" :key="index">
             <td>
-              <span>{{p.titulo}}</span>
+              <span>{{ p.titulo }}</span>
             </td>
             <div>
-             <td class="text-success" v-if="p.disponible">
-              <span >Juego disponible</span>
-            </td>
-            <td class="text-danger" v-else>
-              <span >Juego no disponible</span>
-            </td>
-            </div>            
-             <td>
-              <span>{{p.genero}}</span>
+              <td class="text-success" v-if="p.disponible">
+                <span>Juego disponible</span>
+              </td>
+              <td class="text-danger" v-else>
+                <span>Juego no disponible</span>
+              </td>
+            </div>
+            <td>
+              <span>{{ p.genero }}</span>
             </td>
             <td>
-              <span>${{p.monto}}</span>
+              <span>${{ p.monto }}</span>
             </td>
             <td>
-              <span>{{p.creador}}</span>
+              <span>{{ p.creador }}</span>
             </td>
             <td>
               <div class="text-center" @click="editarProyecto(index)">
                 <button class="btn btn-warning">
                   Editar
-                  <span ></span>
+                  <span></span>
                 </button>
               </div>
             </td>
@@ -76,13 +97,32 @@
               </div>
             </td>
             <td>
-              <div><button @click="agregarProyectoDev(p.id)" class="btn btn-dark text-center">Dev</button> <span></span></div>
+              <div>
+                <button
+                  @click="agregarProyectoDev(p.id)"
+                  class="btn btn-dark text-center"
+                >
+                  Dev
+                </button>
+                <span></span>
+              </div>
             </td>
             <div>
-              <button @click="agregarProyectoPat(p.id)" class="btn btn-dark text-center">Patrocinar</button> <span></span>
+              <button
+                @click="agregarProyectoPat(p.id)"
+                class="btn btn-dark text-center"
+              >
+                Patrocinar
+              </button>
+              <span></span>
             </div>
             <td>
-              <div><button @click="producto" class="btn btn-primary text-center">Ver</button> <span></span></div>
+              <div>
+                <button @click="producto" class="btn btn-primary text-center">
+                  Ver
+                </button>
+                <span></span>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -107,21 +147,15 @@
 
 
 <script>
-import { mapGetters } from 'vuex';
-import axios from 'axios'
+import { mapGetters } from "vuex";
+import axios from "axios";
 export default {
   name: "Principal",
   components: {},
-  computed:{
+  computed: {
     ...mapGetters({ listaProyectos: "getProyectos" }),
     ...mapGetters({ usuarios: "getUsuarios" }),
     ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
-
-    logeado:{
-       set(){
-            this.$store.commit('setAuth');
-        }
-    }
   },
   data() {
     return {
@@ -142,21 +176,19 @@ export default {
   },
 
   methods: {
-    
     addProyect() {
       alert(this.msj);
     },
-    login(){
+    login() {
       this.$router.push("/");
     },
     logout() {
       if (this.usuarioLogeado.nombre !== undefined) {
         this.$store.state.auth = false;
-        this.usuarioLogeado.nombre = undefined
-               
+        this.usuarioLogeado.nombre = undefined;
+
         this.$router.push("/");
       } else {
-        
         this.$router.push("/");
       }
     },
@@ -169,90 +201,142 @@ export default {
     moduloUsuario() {
       this.$router.push("/modulo_usuario");
     },
-   
- async agregarProyectoDev(index){
-     const i = Number(index)
-     if(this.usuarioLogeado !== null){
-       try {
-         const proyecto = await axios.get(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
-          if(proyecto.data.disponible){
 
-            this.usuarioLogeado.proyectosDev.push(proyecto.data) 
-            alert("Proyecto guardado en lista DEV")
-            this.addProyect()
-          } else{
-            alert("Proyecto no disponible")
+    async agregarProyectoDev(index) {
+      const i = Number(index);
+      const result = window.confirm("Desea agregar el proyecto a su lista?")
+      if (this.usuarioLogeado !== null && result) {
+        try {
+          const proyecto = await axios.get(
+            `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
+          );
+
+          if (proyecto.data.disponible) {
+
+             const idUsuario = this.usuarioLogeado.id;
+            try {
+              console.log('entre al TRY')
+              const u = await axios
+                .get(
+                  `https://6180891b8bfae60017adfb16.mockapi.io/api/users?id=${idUsuario}`
+                )
+                .then((res) => {
+                  const miUsuario = res.data[0]
+                  console.log(miUsuario.nombre);
+                  miUsuario.proyectosDev.push(proyecto.data);
+                   axios.put(
+                    `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
+                    miUsuario
+                  );
+                });
+
+              console.log("Usuario encontrado");
+            } catch (error) {
+              console.log(error, "No se encontro usuario");
+            }
+            
+            
+            alert("Proyecto guardado en su lista DEV \nVisite su modulo");
+            
+          } else {
+            alert("Proyecto no disponible");
           }
-
-       } catch (error) {
-         console.log(error, "No se puedo agregar")
-       }
-     }
-   },
-   async agregarProyectoPat(index){
-     const i = Number(index)
-     if(this.usuarioLogeado !== null){
-
-       try {
-         const proyecto = await axios.get(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
-        console.log(proyecto.data.disponible)
-
-        if(proyecto.data.disponible){
-
-           this.usuarioLogeado.proyectosPat.push(proyecto.data) 
-           alert("Proyecto guardado en lista PAT")
-           this.addProyect()
-        } else {
-          alert("Proyecto no disponible")
+        } catch (error) {
+          console.log(error, "No se puedo agregar");
         }
+      }
+    },
 
-         
-       } catch (error) {
-         console.log(error, "No se puedo agregar")
-       }
-     }
-   },
 
-   async push() {
+    async agregarProyectoPat(index) {
+      const i = Number(index);
+      const result = window.confirm("Desea agregar el proyecto a su lista?")
+      if (this.usuarioLogeado !== null && result) {
+        try {
+          const proyecto = await axios.get(
+            `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
+          );
+          console.log(proyecto.data.disponible);
 
+          if (proyecto.data.disponible) {
+            /* this.usuarioLogeado.proyectosPat.push(proyecto.data); */
+
+            const idUsuario = this.usuarioLogeado.id;
+            try {
+              const u = await axios
+                .get(
+                  `https://6180891b8bfae60017adfb16.mockapi.io/api/users?id=${idUsuario}`
+                )
+                .then((res) => {
+                  const miUsuario = res.data[0]
+                  console.log(miUsuario.nombre);
+                  miUsuario.proyectosPat.push(proyecto.data);
+                   axios.put(
+                    `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
+                    miUsuario
+                  );
+                });
+
+              console.log("Usuario encontrado");
+            } catch (error) {
+              console.log(error, "No se encontro usuario");
+            }
+
+            alert("Proyecto guardado en lista PAT Proyecto guardado en su lista DEV \nVisite su modulo");
+            
+          } else {
+            alert("Proyecto no disponible");
+          }
+        } catch (error) {
+          console.log(error, "No se puedo agregar");
+        }
+      }
+    },
+
+
+    async push() {
       console.log("arranca");
-      if(this.proyectoNuevo.titulo !== "" && this.proyectoNuevo.genero !== "" 
-      && Number(this.proyectoNuevo.monto) > 0 ){
-        
-       await axios.post("https://618194d132c9e2001780488e.mockapi.io/api/products", {
-          titulo: this.proyectoNuevo.titulo,
-          disponible: this.proyectoNuevo.disponible,
-          genero: this.proyectoNuevo.genero,
-          monto: Number(this.proyectoNuevo.monto),
-          creador: this.usuarioLogeado.nombre,
-        },
+      if (
+        this.proyectoNuevo.titulo !== "" &&
+        this.proyectoNuevo.genero !== "" &&
+        Number(this.proyectoNuevo.monto) > 0
+      ) {
+        await axios.post(
+          "https://618194d132c9e2001780488e.mockapi.io/api/products",
+          {
+            titulo: this.proyectoNuevo.titulo,
+            disponible: this.proyectoNuevo.disponible,
+            genero: this.proyectoNuevo.genero,
+            monto: Number(this.proyectoNuevo.monto),
+            creador: this.usuarioLogeado.nombre,
+          },
           alert("Proyecto creado"),
           console.log("termina")
         );
-      } else{
-        alert("Complete todos los campos")
+      } else {
+        alert("Complete todos los campos");
         console.log("Fallo en el envio");
       }
-      this.limpiarCampos()
+      this.limpiarCampos();
     },
 
-    limpiarCampos(){
-      document.getElementById("ingresoT").value=""
-      document.getElementById("ingresoG").value=""
-      document.getElementById("ingresoM").value=""
-      document.getElementById("ingresoC").value=""
-
+    limpiarCampos() {
+      document.getElementById("ingresoT").value = "";
+      document.getElementById("ingresoG").value = "";
+      document.getElementById("ingresoM").value = "";
+      document.getElementById("ingresoC").value = "";
     },
 
-  async borrarProyecto(index) {
-
-    const i = Number(index)
-    try {
-      const proyecto = await axios.delete(`https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`)
-      alert('El proyecto fue borrado')
-    } catch (error) {
-      console.log(error, "error al borrar")
-    }
+    async borrarProyecto(index) {
+      const i = Number(index);
+      try {
+        const proyecto = await axios.delete(
+          `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
+        );
+        alert("El proyecto fue borrado");
+      } catch (error) {
+        console.log(error, "error al borrar");
+      }
     },
 
     editarProyecto(index) {
@@ -285,7 +369,7 @@ export default {
 .finalizado {
   text-decoration: line-through;
 }
-.form-control{
+.form-control {
   box-shadow: 0 30px 50px 0 rgba(151, 24, 24, 0.562);
 }
 </style>
