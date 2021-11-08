@@ -2,7 +2,6 @@
   <div>
     <div class="container">
       <h1>{{ titulo }}</h1>
-      <button @click="getUsuarioLogeado">prueba</button>
       <div class="d-flex">
         <input
           id="ingresoT"
@@ -169,8 +168,6 @@ export default {
       proyectoEditado: null,
       titulo: "Pagina Principal",
       proyectos: [],
-      estados: ["reclutando", "en progreso", "finalizado"],
-      generos: ["Rol", "Rpg", "Accion", "Aventura", "Deportes", "Estrategia"],
       msj: "Porfavor visite su modulo para ver mas detalles",
     };
   },

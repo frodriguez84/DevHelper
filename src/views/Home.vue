@@ -7,14 +7,14 @@
     </div>
     <hr />
     
-    <div>
+    <!-- <div>
       <button @click="getUsuarios">Obtener usuarios</button>
       <ul>
         <span v-for="user in usuarios" :key="user.id">[ {{user.nombre}} ]</span>
         <br>
         <span v-for="user in usuarios" :key="user.id">[ {{user.password}} ]</span>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 

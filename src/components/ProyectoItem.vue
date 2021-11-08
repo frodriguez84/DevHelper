@@ -9,13 +9,14 @@
       <div class="card-body">
         <p class="card-text">Genero: {{ proyecto.genero }}</p>
         <p class="card-text">Monto: ${{ proyecto.monto }}</p>
+        <button @click="producto" class="btn btn-outline-primary btn-block">Ver</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import mapGetters from 'vuex'
+
 export default {
   props: {
     proyecto: {
@@ -23,6 +24,11 @@ export default {
       required: true,
     },
   },
+  methods:{
+    producto() {
+      this.$router.push("/producto");
+    },
+  }
 };
 </script>
 <style scoped>
