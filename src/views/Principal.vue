@@ -151,7 +151,7 @@
 
 <script>
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
 export default {
   name: "Principal",
@@ -181,6 +181,9 @@ export default {
   },
 
   methods: {
+
+    ...mapActions("pushProyectos"),
+
     addProyect() {
       alert(this.msj);
     },
@@ -298,6 +301,14 @@ export default {
     },
 
     async push() {
+      let nuevoProyecto = {
+        titulo: this.proyectoNuevo.titulo,
+            disponible: this.proyectoNuevo.disponible,
+            genero: this.proyectoNuevo.genero,
+            monto: Number(this.proyectoNuevo.monto),
+            creador: this.usuarioLogeado.nombre,
+      }
+
       if (
         this.proyectoNuevo.titulo !== "" &&
         this.proyectoNuevo.genero !== "" &&
@@ -305,17 +316,12 @@ export default {
       ) {
         //dispatch para mostrar el nuevo objeto
         await axios.post(
-          "https://618194d132c9e2001780488e.mockapi.io/api/products",
-          {
-            titulo: this.proyectoNuevo.titulo,
-            disponible: this.proyectoNuevo.disponible,
-            genero: this.proyectoNuevo.genero,
-            monto: Number(this.proyectoNuevo.monto),
-            creador: this.usuarioLogeado.nombre,
-          },
-          alert("Proyecto creado"),
+          "https://618194d132c9e2001780488e.mockapi.io/api/products", nuevoProyecto)
+          .then(this.$store.dispatch("pushProyectos", nuevoProyecto))   
           
-        );
+          alert("Proyecto creado")
+          
+        
       } else {
         alert("Complete todos los campos");
         console.log("Fallo en el envio");
@@ -332,7 +338,7 @@ export default {
 
     async borrarProyecto(index) {
       const i = Number(index);
-      const result = window.confirm("Desea agregar el proyecto a su lista?");
+      const result = window.confirm("Desea borrar el proyecto?");
       if (result) {
         try {
           const proyecto = await axios.delete(
