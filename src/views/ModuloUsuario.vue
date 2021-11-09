@@ -33,7 +33,7 @@
             <span>{{ p.creador }}</span>
           </td>
           <td>
-            <div class="text-center" @click="borrar(p.id)">
+            <div class="text-center" @click="borrarDev(p.id)">
               <button class="btn btn-danger">Borrar</button>
               <span class="fa fa-trash"></span>
             </div>
@@ -57,6 +57,7 @@
           <th scope="col">Creador</th>
           <th scope="col">Cuanto aportar?</th>
           <th scope="col">Mi monto</th>
+          <th scope="col">Borrar</th>
           <th scope="col">Ver</th>
         </tr>
       </thead>
@@ -82,6 +83,12 @@
             <span>{{ monto }}</span>
           </td>
           <td>
+            <div class="text-center" @click="borrarPat(p.id)">
+              <button class="btn btn-danger">Borrar</button>
+              <span class="fa fa-trash"></span>
+            </div>
+          </td>
+          <td>
             <button class="btn btn-warning" @click="producto">Ver</button>         
           </td>
         </tr>
@@ -96,6 +103,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapGetters } from "vuex";
 export default {
   name: "ModuloUsuario",
@@ -120,9 +128,38 @@ export default {
     producto() {
       this.$router.push("/producto");
     },
-    borrarDev(index) {
-      this.usuarioLogeado.proyectosDev.splice(index, 1);
+  async borrarDev(index) {
+
+      const i = Number(index);
+      const miUsuario = this.usuarioLogeado
+      const borrado = miUsuario.proyectosDev.findIndex(element => element.id == i)
+      miUsuario.proyectosDev.splice(borrado, 1)
+
+      try {
+        await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
+                      miUsuario)
+      } catch (error) {
+        console.log(error, 'No se pudo enviar')
+      }
+
     },
+  async borrarPat(index) {
+      const i = Number(index);
+      const miUsuario = this.usuarioLogeado
+      const borrado = miUsuario.proyectosPat.findIndex(element => element.id == i)
+      miUsuario.proyectosPat.splice(borrado, 1)
+
+      try {
+        
+        await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
+                      miUsuario)
+      } catch (error) {
+        console.log(error, 'No se pudo enviar')
+      }
+
+    },
+
+
     aportar(index){
 
     },

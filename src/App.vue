@@ -16,7 +16,7 @@
                 >Bienvenido:
                 {{ this.$store.state.userSeleccionado.nombre }}</b-navbar-brand
               >
-              <button @click="logout" class="user1">Logout</button>
+              <button @click="logout" class="user1 btn btn-danger">Logout</button>
 
               <b-nav-item
                 :to="{ name: 'Principal' }"
@@ -27,9 +27,9 @@
               <b-nav-item :to="{ name: 'Tienda' }" active-class="active" exact
                 >Tienda</b-nav-item
               >
-              <b-nav-item :to="{ name: 'Producto' }" active-class="active" exact
+              <!-- <b-nav-item :to="{ name: 'Producto' }" active-class="active" exact
                 >Producto</b-nav-item
-              >
+              > -->
               <b-nav-item
                 :to="{ name: 'ModuloUsuario' }"
                 active-class="active"

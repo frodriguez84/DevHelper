@@ -1,48 +1,7 @@
 <template>
   <div class="container">
-    <div>
-      <h2>Resultado de busqueda</h2>
-      <h4>Estas buscando por: Aventura, Rol</h4>
-    </div>
-
-    <table class="table table-success">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Creador</th>
-          <th scope="col">Presupuesto necesario</th>
-          <th scope="col">Ver</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mario Kart</td>
-          <td>Otto</td>
-          <td>$ 1000</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Baldur's Gate 3</td>
-          <td>Larian</td>
-          <td>$ 1500</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Lineage 2</td>
-          <td>the Bird</td>
-          <td>$ 950</td>
-          <td><button @click="producto">Ver</button></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div>
-      <button @click="tienda">Volver</button>
-    </div>
+    <button @click="toggleModal">Open Modal</button>
+	     
   </div>
 </template>
 
@@ -55,16 +14,16 @@ export default {
     
   },
   data() {
-    return {};
+    return {
+      isShowModal: false
+    };
   },
 
   methods: {
-    tienda() {
-      this.$router.push("/tienda");
+   toggleModal() {
+      this.isShowModal = !this.isShowModal;
     },
-    producto() {
-      this.$router.push("/producto");
-    },
+    
   },
 };
 </script>

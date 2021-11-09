@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <h1>{{ titulo }}</h1>
-    <button @click="promedioProPorUsuario">Promedio</button>
-    <button @click="promedioMonto">Promedio</button>
     <div>
       <h3>Proyecto mas caro en desarrollar</h3>
     </div>
@@ -58,7 +56,6 @@
   </div>
 </template>
 
-
 <script>
 import { mapGetters } from "vuex";
 export default {
@@ -91,7 +88,6 @@ export default {
   methods: {
     proyectoMasCostoso() {
       let max = 0;
-
       this.listaProyectos.forEach((p) => {
         if (p.monto > max) {
           this.proyectoMax = p;
@@ -124,7 +120,7 @@ export default {
           this.cantProDisp++;
         }
       });
-      return cantProDisp;
+      
     },
 
     promedioProPorUsuario() {
@@ -143,7 +139,8 @@ export default {
       return suma
     },
     promedioMonto(){
-        this.promMontoProyectos = this.sumatoriaMontos() / this.cantidadProyectos()
+        let num = this.sumatoriaMontos() / this.cantidadProyectos()
+        this.promMontoProyectos = num.toFixed(2)
         
     }
   },

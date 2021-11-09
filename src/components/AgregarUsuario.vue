@@ -96,16 +96,7 @@ export default {
 
   methods: {
     ...mapActions("agregarUsuario"),
-    /* agregarUsuario(usuario) {
-      if (usuario.clave !== usuario.clave2) {
-        alert("Los password deben ser iguales");
-      } else {
-        
-        this.$store.dispatch("agregarUsuario", usuario);
-        alert("Usuario " + usuario.nombre + " creado \nPor favor logeese" )
-        this.$router.push("/login");
-      }
-    }, */
+    
     login() {
         this.$router.push("/login");
     },

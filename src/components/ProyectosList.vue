@@ -5,10 +5,7 @@
         Se encontraron: {{ proyectos.length }} proyectos
       </div>
       <proyecto :proyecto="p" v-for="p in proyectos" :key="p.id"></proyecto>
-      <!-- <span v-for="p in proyectos" :key="p.id">
-        <p>{{ p.titulo }}</p>
-        <p>{{ p.monto }}</p>
-      </span> -->
+      
     </div>
     <div v-else class="alert alert-danger">No se encontraron proyectos</div>
   </div>
