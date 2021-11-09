@@ -121,7 +121,10 @@
             </div>
             <td>
               <div>
-                <button @click="producto" class="btn btn-outline-primary btn-block">
+                <button
+                  @click="producto"
+                  class="btn btn-outline-primary btn-block"
+                >
                   Ver
                 </button>
                 <span></span>
@@ -150,14 +153,11 @@
 
 
 <script>
-
 import { mapGetters, mapActions } from "vuex";
 import axios from "axios";
 export default {
   name: "Principal",
-  components: {
-    
-  },
+  components: {},
   computed: {
     ...mapGetters({ listaProyectos: "getProyectos" }),
     ...mapGetters({ usuarios: "getUsuarios" }),
@@ -181,8 +181,8 @@ export default {
   },
 
   methods: {
-
     ...mapActions("pushProyectos"),
+    ...mapActions("llenarProyectos"),
 
     addProyect() {
       alert(this.msj);
@@ -303,11 +303,11 @@ export default {
     async push() {
       let nuevoProyecto = {
         titulo: this.proyectoNuevo.titulo,
-            disponible: this.proyectoNuevo.disponible,
-            genero: this.proyectoNuevo.genero,
-            monto: Number(this.proyectoNuevo.monto),
-            creador: this.usuarioLogeado.nombre,
-      }
+        disponible: this.proyectoNuevo.disponible,
+        genero: this.proyectoNuevo.genero,
+        monto: Number(this.proyectoNuevo.monto),
+        creador: this.usuarioLogeado.nombre,
+      };
 
       if (
         this.proyectoNuevo.titulo !== "" &&
@@ -315,13 +315,14 @@ export default {
         Number(this.proyectoNuevo.monto) > 0
       ) {
         //dispatch para mostrar el nuevo objeto
-        await axios.post(
-          "https://618194d132c9e2001780488e.mockapi.io/api/products", nuevoProyecto)
-          .then(this.$store.dispatch("pushProyectos", nuevoProyecto))   
-          
-          alert("Proyecto creado")
-          
-        
+        await axios
+          .post(
+            "https://618194d132c9e2001780488e.mockapi.io/api/products",
+            nuevoProyecto
+          )
+          .then(this.$store.dispatch("pushProyectos", nuevoProyecto));
+
+        alert("Proyecto creado");
       } else {
         alert("Complete todos los campos");
         console.log("Fallo en el envio");
@@ -345,6 +346,7 @@ export default {
             `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
           );
           alert("El proyecto fue borrado");
+          //dispatch con splice
         } catch (error) {
           console.log(error, "error al borrar");
         }

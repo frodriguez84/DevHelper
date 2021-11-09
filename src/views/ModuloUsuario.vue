@@ -104,7 +104,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "ModuloUsuario",
   components: {},
@@ -122,6 +122,9 @@ export default {
   },
 
   methods: {
+
+    ...mapActions("pushUsuarios"),
+
     tienda() {
       this.$router.push("/tienda");
     },
@@ -138,6 +141,7 @@ export default {
       try {
         await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
                       miUsuario)
+                      .then(this.$store.dispatch("pushUsuarios", miUsuario))
       } catch (error) {
         console.log(error, 'No se pudo enviar')
       }
@@ -153,6 +157,7 @@ export default {
         
         await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
                       miUsuario)
+                      .then(this.$store.dispatch("pushUsuarios", miUsuario))
       } catch (error) {
         console.log(error, 'No se pudo enviar')
       }

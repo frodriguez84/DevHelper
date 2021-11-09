@@ -53,6 +53,10 @@ export default new Vuex.Store({
       state.usuarios = usuarios
     },
 
+    pushUsuarios: (state, usuarios) =>{
+      state.proyectos.push(usuarios)
+    },
+
   },
   actions: {
 
@@ -74,7 +78,11 @@ export default new Vuex.Store({
 
     llenarUsuarios: ({ commit }, usuarios) =>{
       commit('llenarUsuarios', usuarios)
-    }
+    },
+
+    pushusUarios: ({ commit }, usuarios) => {
+      commit('pushProyectos', usuarios)
+    },
 
   },
   modules: {
