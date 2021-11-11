@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userSeleccionado: null,
     listaUsuarios: [],
     proyectos: [],
+    actualizar: false,
     url: "https://6180891b8bfae60017adfb16.mockapi.io/api/users",
     url: "https://618194d132c9e2001780488e.mockapi.io/api/products",
     filter: {
@@ -28,6 +29,10 @@ export default new Vuex.Store({
   mutations: {
     setAuth(state) {
       state.auth = !state.auth
+    },
+
+    setActualizar(state){
+      state.actualizar = !state.actualizar
     },
 
     /* agregarUsuario: (state, usuario) => {
@@ -49,6 +54,11 @@ export default new Vuex.Store({
       state.proyectos.push(proyectos)
     },
 
+    borrarProyecto: (state, id) => {
+      let borrado = state.proyectos.findIndex(element => element.id == id)
+      state.proyectos.splice(borrado, 1)
+    },
+
     llenarUsuarios: (state, usuarios) =>{
       state.usuarios = usuarios
     },
@@ -56,6 +66,7 @@ export default new Vuex.Store({
     pushUsuarios: (state, usuarios) =>{
       state.proyectos.push(usuarios)
     },
+  
 
   },
   actions: {
@@ -67,6 +78,9 @@ export default new Vuex.Store({
     setAuthAction(context) {
       context.commit('setAuth')
     },
+    setActualizar(context){
+      context.commit('setActualizar')
+    },
 
     llenarProyectos: ({ commit }, proyectos) => {
       commit('llenarProyectos', proyectos)
@@ -74,6 +88,10 @@ export default new Vuex.Store({
 
     pushProyectos: ({ commit }, proyectos) => {
       commit('pushProyectos', proyectos)
+    },
+
+    borrarProyecto: ({ commit }, id) =>{
+      commit('borrarProyecto', id, 1)
     },
 
     llenarUsuarios: ({ commit }, usuarios) =>{
@@ -104,6 +122,9 @@ export default new Vuex.Store({
     },
     getUsuarioLogeado:(state)=>{
       return state.userSeleccionado
+    },
+    getActualizar:(state)=>{
+      return state.actualizar
     }
   },
 

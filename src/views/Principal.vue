@@ -38,6 +38,13 @@
             Al Login
           </button>
         </div>
+
+        <div v-else-if="this.actualizar">
+          <button @click="update" class="btn btn-warning rounded-2">
+            Actualizar Proyecto
+          </button>
+        </div>
+
         <div v-else>
           <button @click="push" class="btn btn-success rounded-2">
             Crear Proyecto
@@ -82,14 +89,8 @@
               <span>{{ p.creador }}</span>
             </td>
             <td>
-              <div class="text-center">
-                <button
-                  v-if="!actualizar"
-                  @click="editarProyecto"
-                  class="btn btn-warning"
-                >
-                  Editar
-                </button>
+              <div class="text-center" @click="editarProyecto(p.id)">
+                <button class="btn btn-warning">Editar</button>
                 <span class="fa fa-pen"></span>
               </div>
             </td>
@@ -162,6 +163,7 @@ export default {
     ...mapGetters({ listaProyectos: "getProyectos" }),
     ...mapGetters({ usuarios: "getUsuarios" }),
     ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
+    ...mapGetters({ actualizar: "getActualizar" }),
   },
   data() {
     return {
@@ -171,7 +173,6 @@ export default {
         genero: "",
         monto: 0,
         creador: "",
-        actualizar: false,
       },
       proyectoEditado: null,
       titulo: "Pagina Principal",
@@ -183,6 +184,8 @@ export default {
   methods: {
     ...mapActions("pushProyectos"),
     ...mapActions("llenarProyectos"),
+    ...mapActions("borrarProyecto"),
+    ...mapActions("setActualizar"),
 
     addProyect() {
       alert(this.msj);
@@ -216,7 +219,7 @@ export default {
     async agregarProyectoDev(index) {
       const i = Number(index);
       const result = window.confirm("Desea agregar el proyecto a su lista?");
-      if (this.usuarioLogeado !== null && result) {
+      if (this.usuarioLogeado !== undefined && result) {
         try {
           const proyecto = await axios.get(
             `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
@@ -225,22 +228,19 @@ export default {
           if (proyecto.data.disponible) {
             const idUsuario = this.usuarioLogeado.id;
             try {
-              console.log("entre al TRY");
               const u = await axios
                 .get(
                   `https://6180891b8bfae60017adfb16.mockapi.io/api/users?id=${idUsuario}`
                 )
                 .then((res) => {
                   const miUsuario = res.data[0];
-                  console.log(miUsuario.nombre);
+
                   miUsuario.proyectosDev.push(proyecto.data);
                   axios.put(
                     `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
                     miUsuario
                   );
                 });
-
-              console.log("Usuario encontrado");
             } catch (error) {
               console.log(error, "No se encontro usuario");
             }
@@ -258,16 +258,13 @@ export default {
     async agregarProyectoPat(index) {
       const i = Number(index);
       const result = window.confirm("Desea agregar el proyecto a su lista?");
-      if (this.usuarioLogeado !== null && result) {
+      if (this.usuarioLogeado !== undefined && result) {
         try {
           const proyecto = await axios.get(
             `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
           );
-          console.log(proyecto.data.disponible);
 
           if (proyecto.data.disponible) {
-            /* this.usuarioLogeado.proyectosPat.push(proyecto.data); */
-
             const idUsuario = this.usuarioLogeado.id;
             try {
               const u = await axios
@@ -282,8 +279,6 @@ export default {
                     miUsuario
                   );
                 });
-
-              console.log("Usuario encontrado");
             } catch (error) {
               console.log(error, "No se encontro usuario");
             }
@@ -297,6 +292,8 @@ export default {
         } catch (error) {
           console.log(error, "No se puedo agregar");
         }
+      } else {
+        alert("Para agregar proyectos debe logearse");
       }
     },
 
@@ -331,10 +328,12 @@ export default {
     },
 
     limpiarCampos() {
-      document.getElementById("ingresoT").value = "";
+      this.proyectoNuevo.titulo = "";
+      this.proyectoNuevo.genero = "";
+      this.proyectoNuevo.monto = "";
+      /* document.getElementById("ingresoT").value = "";
       document.getElementById("ingresoG").value = "";
-      document.getElementById("ingresoM").value = "";
-      document.getElementById("ingresoC").value = "";
+      document.getElementById("ingresoM").value = ""; */
     },
 
     async borrarProyecto(index) {
@@ -342,10 +341,13 @@ export default {
       const result = window.confirm("Desea borrar el proyecto?");
       if (result) {
         try {
-          const proyecto = await axios.delete(
-            `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
-          );
-          alert("El proyecto fue borrado");
+          const proyecto = await axios
+            .delete(
+              `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
+            )
+            .then(this.$store.dispatch("borrarProyecto", i, 1));
+
+          alert(`El proyecto ${proyecto.data.titulo} fue borrado`);
           //dispatch con splice
         } catch (error) {
           console.log(error, "error al borrar");
@@ -353,9 +355,55 @@ export default {
       }
     },
 
-    editarProyecto() {
-      this.actualizar = !this.actualizar;
-      console.log(this.actualizar);
+    editarProyecto(index) {
+      if (this.usuarioLogeado.nombre === this.listaProyectos[i].creador) {
+        this.$store.dispatch("setActualizar");
+        const i = Number(index - 1);
+
+        let pEditado = {
+          titulo: this.listaProyectos[i].titulo,
+          genero: this.listaProyectos[i].genero,
+          monto: this.listaProyectos[i].monto,
+          id: this.listaProyectos[i].id,
+        };
+
+        this.proyectoNuevo.titulo = pEditado.titulo;
+        this.proyectoNuevo.genero = pEditado.genero;
+        this.proyectoNuevo.monto = pEditado.monto;
+
+        this.proyectoEditado = pEditado;
+        console.log(this.proyectoEditado);
+      } else {
+        alert(
+          "No puede modifcar el proyecto seleccionado. \nAsegurese de ser el creador del mismo"
+        );
+      }
+    },
+
+    update() {
+      console.log("entro al update");
+      console.log(this.proyectoEditado);
+      const result = window.confirm(
+        "Esta por editar un proyecto, desea continuar?"
+      );
+      if (this.proyectoEditado !== null && result) {
+        this.proyectoEditado.titulo = this.proyectoNuevo.titulo;
+        this.proyectoEditado.genero = this.proyectoNuevo.genero;
+        this.proyectoEditado.monto = this.proyectoNuevo.monto;
+        try {
+          axios
+            .put(
+              `https://618194d132c9e2001780488e.mockapi.io/api/products/${this.proyectoEditado.id}`,
+              this.proyectoEditado
+            )
+            .then(this.$store.dispatch("pushProyectos", this.proyectoEditado));
+          alert("Proyecto editado correctamente");
+        } catch (error) {
+          console.log(error, "No se pudo editar");
+        }
+      }
+      this.$store.dispatch("setActualizar");
+      this.limpiarCampos();
     },
 
     firstCharUpper(letra) {

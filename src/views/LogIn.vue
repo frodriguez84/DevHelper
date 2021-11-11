@@ -49,7 +49,6 @@
 
 <script>
 import { mapGetters } from "vuex";
-import axios from "axios";
 export default {
   name: "Login",
 
@@ -58,7 +57,10 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      nombre: "",
+      clave: "",
+    };
   },
 
   methods: {
