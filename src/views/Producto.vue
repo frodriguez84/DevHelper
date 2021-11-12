@@ -13,10 +13,22 @@
         class="mb-2"
         >{{ nombreJuego }}
         <b-card-text>
-          {{ descripcion }}
+         
+        <div v-if="!desc">
+          <b-button @click="mostrarDesc" variant="primary">Descripcion</b-button>
+        </div>
+        <div v-else>
+          <h6>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo,
+            eveniet nesciunt iste voluptatem dignissimos et obcaecati
+            consectetur! Dicta hic accusantium veritatis molestiae! Unde quia
+            beatae numquam distinctio commodi, iure saepe?
+          </h6>
+          <br>
+          <b-button @click="mostrarDesc" variant="primary">Ocultar</b-button>
+        </div>
         </b-card-text>
 
-        <b-button href="#" variant="primary">Imagenes</b-button>
       </b-card>
 
       <div class="pos">
@@ -57,34 +69,29 @@
         <b-button @click="principal" variant="dark">Volver</b-button>
       </div>
     </div>
-
-    
   </div>
 </template>
 
 
 <script>
-
-
-
 export default {
   name: "Producto",
-  components: {
-    
-  },
+  components: {},
 
   data() {
     return {
       titulo: "Proyecto: ",
       nombreJuego: "Baldur's Gate 3",
-      descripcion: "Agregar una descripcion",
       striped: true,
-      
+      desc: false,
     };
   },
   methods: {
     principal() {
       this.$router.push("/principal");
+    },
+    mostrarDesc() {
+      this.desc = !this.desc;
     },
   },
 };

@@ -212,7 +212,7 @@ export default {
           alert("Su aporte ha sido guardado");
         } else {
           alert(
-            "El monto no es correcto. \nPor favor verifique la cantidad ingresada"
+            "El monto no es correcto o supera la meta para el desarrollo. \nPor favor verifique la cantidad ingresada"
           );
         }
       }
