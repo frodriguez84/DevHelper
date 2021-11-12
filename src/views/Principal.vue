@@ -2,6 +2,7 @@
   <div>
     <div class="container">
       <h1>{{ titulo }}</h1>
+      
       <div class="d-flex">
         <input
           id="ingresoT"
@@ -280,7 +281,7 @@ export default {
             }
 
             alert(
-              "Proyecto guardado en lista PAT Proyecto guardado en su lista DEV \nVisite su modulo"
+              "Proyecto guardado en lista PAT \nVisite su modulo"
             );
           } else {
             alert("Proyecto no disponible");
@@ -376,8 +377,7 @@ export default {
       }
     },
 
-    update() {       
-      
+    update() {
       const result = window.confirm(
         "Esta por editar un proyecto, desea continuar?"
       );

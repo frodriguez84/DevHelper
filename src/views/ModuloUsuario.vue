@@ -5,6 +5,7 @@
     </h1>
     <div>
       <h4>Proyectos colaborando como DEV</h4>
+      <!-- <h1>{{usuarioLogeado.proyectosDev[0]}}</h1> -->
     </div>
 
     <table class="table table-success">
@@ -56,7 +57,7 @@
           <th scope="col">Meta para desarrollo</th>
           <th scope="col">Creador</th>
           <th scope="col">Cuanto aportar?</th>
-          <th scope="col">Mi monto</th>
+          <th scope="col">Mi aporte</th>
           <th scope="col">Borrar</th>
           <th scope="col">Ver</th>
         </tr>
@@ -76,11 +77,17 @@
             <span>{{ p.creador }}</span>
           </td>
           <td>
-            <input v-model="monto" type="number">
-            <button @click="aportar(p.id)">Patrocinar</button>
+            <div v-if="!aporto">
+              <input v-model="p.aporte" type="number" />
+              <button @click="aportar(p.id, p.aporte)" class="btn btn-warning">Aportar</button>
+            </div>
+            <div v-else>
+              <input v-model="p.aporte" type="number" disabled />
+              <span class="btn btn-success disabled">Gracias</span>
+            </div>
           </td>
           <td>
-            <span>{{ monto }}</span>
+            <span> {{ p.aporte }} </span>
           </td>
           <td>
             <div class="text-center" @click="borrarPat(p.id)">
@@ -89,12 +96,12 @@
             </div>
           </td>
           <td>
-            <button class="btn btn-warning" @click="producto">Ver</button>         
+            <button class="btn btn-outline-primary btn-block" @click="producto">Ver</button>
           </td>
         </tr>
       </tbody>
     </table>
-    
+      <h5 class="text-danger">Nota: Complete todos los aportes y clikee en "Aportar"</h5>
     <hr />
     <div>
       <button class="btn btn-dark" @click="tienda">Volver</button>
@@ -103,7 +110,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "ModuloUsuario",
@@ -117,12 +124,16 @@ export default {
 
   data() {
     return {
-      monto: 0,
+      aporto: false,
     };
   },
 
-  methods: {
+  beforeMount() {
+    this.cargarListaDev();
+    this.cargarListaPat();
+  },
 
+  methods: {
     ...mapActions("pushUsuarios"),
 
     tienda() {
@@ -131,42 +142,69 @@ export default {
     producto() {
       this.$router.push("/producto");
     },
-  async borrarDev(index) {
-
+    async borrarDev(index) {
       const i = Number(index);
-      const miUsuario = this.usuarioLogeado
-      const borrado = miUsuario.proyectosDev.findIndex(element => element.id == i)
-      miUsuario.proyectosDev.splice(borrado, 1)
+      const miUsuario = this.usuarioLogeado;
+      const borrado = miUsuario.proyectosDev.findIndex(
+        (element) => element.id == i
+      );
+      miUsuario.proyectosDev.splice(borrado, 1);
 
       try {
-        await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
-                      miUsuario)
-                      .then(this.$store.dispatch("pushUsuarios", miUsuario))
+        await axios
+          .put(
+            `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
+            miUsuario
+          )
+          .then(this.$store.dispatch("pushUsuarios", miUsuario));
       } catch (error) {
-        console.log(error, 'No se pudo enviar')
+        console.log(error, "No se pudo enviar");
       }
-
     },
-  async borrarPat(index) {
+    async borrarPat(index) {
       const i = Number(index);
-      const miUsuario = this.usuarioLogeado
-      const borrado = miUsuario.proyectosPat.findIndex(element => element.id == i)
-      miUsuario.proyectosPat.splice(borrado, 1)
+      const miUsuario = this.usuarioLogeado;
+      const borrado = miUsuario.proyectosPat.findIndex(
+        (element) => element.id == i
+      );
+      miUsuario.proyectosPat.splice(borrado, 1);
 
       try {
+        await axios
+          .put(
+            `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
+            miUsuario
+          )
+          .then(this.$store.dispatch("pushUsuarios", miUsuario));
+      } catch (error) {
+        console.log(error, "No se pudo enviar");
+      }
+    },
+
+    aportar(index, aporte) {
+      const i = Number(index);
+      const miUsuario = this.usuarioLogeado;
+      const proyectoId = miUsuario.proyectosPat.findIndex(
+        (element) => element.id == i
+      );
+  
+      if (aporte > 0 && aporte <= miUsuario.proyectosPat[proyectoId].monto) {
+        miUsuario.proyectosPat[proyectoId].monto -= aporte;
         
-        await axios.put( `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${miUsuario.id}`,
-                      miUsuario)
-                      .then(this.$store.dispatch("pushUsuarios", miUsuario))
-      } catch (error) {
-        console.log(error, 'No se pudo enviar')
+        this.aporto = !this.aporto;
+        alert("Su aporte ha sido guardado");
+      } else {
+        alert(
+          "El monto no es correcto. \nPor favor verifique la cantidad ingresada"
+        );
+        
       }
-
     },
-
-
-    aportar(index){
-
+    cargarListaDev() {
+      return this.usuarioLogeado.proyectosDev;
+    },
+    cargarListaPat() {
+      return this.usuarioLogeado.proyectosPat;
     },
   },
 };
