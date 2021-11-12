@@ -20,10 +20,6 @@
           class="form-control"
           @keyup.enter="agregarProyecto"
         />
-
-        <!-- <input id="ingresoC" v-model="proyectoNuevo.creador"  type="text" placeholder="Nombre creador"
-          class="form-control" @keyup.enter="agregarProyecto"   /> -->
-
         <input
           id="ingresoM"
           v-model.number="proyectoNuevo.monto"
@@ -356,9 +352,9 @@ export default {
     },
 
     editarProyecto(index) {
+      const i = Number(index - 1);
       if (this.usuarioLogeado.nombre === this.listaProyectos[i].creador) {
         this.$store.dispatch("setActualizar");
-        const i = Number(index - 1);
 
         let pEditado = {
           titulo: this.listaProyectos[i].titulo,
@@ -380,9 +376,8 @@ export default {
       }
     },
 
-    update() {
-      console.log("entro al update");
-      console.log(this.proyectoEditado);
+    update() {       
+      
       const result = window.confirm(
         "Esta por editar un proyecto, desea continuar?"
       );
