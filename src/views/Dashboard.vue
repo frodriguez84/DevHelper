@@ -36,6 +36,12 @@
     <div class="card">
       <div class="card container row mx-auto">
         <div class="card-header">
+          <h5>Cantidad de proyectos de {{ usuarioLogeado.nombre }}</h5>
+          <h5 class="text-primary">{{ proyectosUsuario }}</h5>
+        </div>
+      </div>
+      <div class="card container row mx-auto">
+        <div class="card-header">
           <h5>Cantidad de proyectos disponibles</h5>
           <h5 class="text-success">{{ cantProDisp }}</h5>
         </div>
@@ -52,6 +58,20 @@
           <h5 class="text-warning">${{ promMontoProyectos }}</h5>
         </div>
       </div>
+    </div>
+    <br />
+    <div>
+      <button @click="buscar" class="btn btn-success">Buscar proyecto</button>
+    </div>
+    <br />
+    <div>
+      <button @click="moduloUsuario" class="btn btn-dark">
+        Ir Modulo Usuario
+      </button>
+    </div>
+    <br />
+    <div>
+      <button @click="principal" class="btn btn-primary">Principal</button>
     </div>
   </div>
 </template>
@@ -73,6 +93,7 @@ export default {
       cantProDisp: 0,
       promPorUsuario: 0,
       promMontoProyectos: 0,
+      proyectosUsuario: 0,
     };
   },
 
@@ -83,9 +104,21 @@ export default {
     this.cantidadUsuarios();
     this.promedioProPorUsuario();
     this.promedioMonto();
+    this.proyectosDelUsuario();
   },
 
   methods: {
+    buscar() {
+      this.$router.push("/tienda");
+    },
+    principal() {
+      this.$router.push("/principal");
+    },
+    moduloUsuario() {
+      this.$router.push("/modulo_usuario");
+    },
+
+
     proyectoMasCostoso() {
       let max = 0;
       this.listaProyectos.forEach((p) => {
@@ -120,29 +153,35 @@ export default {
           this.cantProDisp++;
         }
       });
-      
     },
 
     promedioProPorUsuario() {
       let prom = Math.trunc(this.cantidadProyectos() / this.cantidadUsuarios());
-      
+
       this.promPorUsuario = prom;
       return this.promPorUsuario;
     },
 
-    sumatoriaMontos(){
-        let suma = 0
-        this.listaProyectos.forEach((p) => {
-        suma += p.monto
+    sumatoriaMontos() {
+      let suma = 0;
+      this.listaProyectos.forEach((p) => {
+        suma += p.monto;
       });
-        
-      return suma
+
+      return suma;
     },
-    promedioMonto(){
-        let num = this.sumatoriaMontos() / this.cantidadProyectos()
-        this.promMontoProyectos = num.toFixed(2)
-        
-    }
+    promedioMonto() {
+      let num = this.sumatoriaMontos() / this.cantidadProyectos();
+      this.promMontoProyectos = num.toFixed(2);
+    },
+
+    proyectosDelUsuario() {
+      this.listaProyectos.forEach((p) => {
+        if (p.creador === this.usuarioLogeado.nombre) {
+          this.proyectosUsuario++;
+        }
+      });
+    },
   },
 };
 </script>

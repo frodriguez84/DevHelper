@@ -79,7 +79,9 @@
           <td>
             <div v-if="!aporto">
               <input v-model="p.aporte" type="number" />
-              <button @click="aportar(p.id, p.aporte)" class="btn btn-warning">Aportar</button>
+              <button @click="aportar(p.id, p.aporte)" class="btn btn-warning">
+                Aportar
+              </button>
             </div>
             <div v-else>
               <input v-model="p.aporte" type="number" disabled />
@@ -87,7 +89,7 @@
             </div>
           </td>
           <td>
-            <span> {{ p.aporte }} </span>
+            <span> ${{ p.aporte }} </span>
           </td>
           <td>
             <div class="text-center" @click="borrarPat(p.id)">
@@ -96,15 +98,23 @@
             </div>
           </td>
           <td>
-            <button class="btn btn-outline-primary btn-block" @click="producto">Ver</button>
+            <button class="btn btn-outline-primary btn-block" @click="producto">
+              Ver
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-      <h5 class="text-danger">Nota: Complete todos los aportes y clikee en "Aportar"</h5>
+    <h5 v-if="usuarioLogeado.proyectosPat.length > 0" class="text-danger">
+      Nota: Complete todos los aportes y clikee en "Aportar"
+    </h5>
     <hr />
     <div>
       <button class="btn btn-dark" @click="tienda">Volver</button>
+    </div>
+    <br />
+    <div>
+      <button class="btn btn-dark" @click="principal">Principal</button>
     </div>
   </div>
 </template>
@@ -135,6 +145,10 @@ export default {
 
   methods: {
     ...mapActions("pushUsuarios"),
+
+    principal() {
+      this.$router.push("/principal");
+    },
 
     tienda() {
       this.$router.push("/tienda");
@@ -182,22 +196,25 @@ export default {
     },
 
     aportar(index, aporte) {
+      const result = window.confirm(
+        "Seguro desea aportar las cantidades indicadas?"
+      );
       const i = Number(index);
       const miUsuario = this.usuarioLogeado;
       const proyectoId = miUsuario.proyectosPat.findIndex(
         (element) => element.id == i
       );
-  
-      if (aporte > 0 && aporte <= miUsuario.proyectosPat[proyectoId].monto) {
-        miUsuario.proyectosPat[proyectoId].monto -= aporte;
-        
-        this.aporto = !this.aporto;
-        alert("Su aporte ha sido guardado");
-      } else {
-        alert(
-          "El monto no es correcto. \nPor favor verifique la cantidad ingresada"
-        );
-        
+      if (result) {
+        if (aporte > 0 && aporte <= miUsuario.proyectosPat[proyectoId].monto) {
+          miUsuario.proyectosPat[proyectoId].monto -= aporte;
+
+          this.aporto = !this.aporto;
+          alert("Su aporte ha sido guardado");
+        } else {
+          alert(
+            "El monto no es correcto. \nPor favor verifique la cantidad ingresada"
+          );
+        }
       }
     },
     cargarListaDev() {

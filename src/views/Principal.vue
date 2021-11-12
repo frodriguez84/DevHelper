@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <h1>{{ titulo }}</h1>
-      
+
       <div class="d-flex">
         <input
           id="ingresoT"
@@ -280,9 +280,7 @@ export default {
               console.log(error, "No se encontro usuario");
             }
 
-            alert(
-              "Proyecto guardado en lista PAT \nVisite su modulo"
-            );
+            alert("Proyecto guardado en lista PAT \nVisite su modulo");
           } else {
             alert("Proyecto no disponible");
           }
@@ -295,48 +293,53 @@ export default {
     },
 
     async push() {
-      let nuevoProyecto = {
-        titulo: this.proyectoNuevo.titulo,
-        disponible: this.proyectoNuevo.disponible,
-        genero: this.proyectoNuevo.genero,
-        monto: Number(this.proyectoNuevo.monto),
-        creador: this.usuarioLogeado.nombre,
-      };
+      const result = window.confirm(
+        "Esta por crear un proyecto, desea continuar?"
+      );
+      if (result) {
+        let nuevoProyecto = {
+          titulo: this.proyectoNuevo.titulo,
+          disponible: this.proyectoNuevo.disponible,
+          genero: this.proyectoNuevo.genero,
+          monto: Number(this.proyectoNuevo.monto),
+          creador: this.usuarioLogeado.nombre,
+        };
 
-      if (
-        this.proyectoNuevo.titulo !== "" &&
-        this.proyectoNuevo.genero !== "" &&
-        Number(this.proyectoNuevo.monto) > 0
-      ) {
-        //dispatch para mostrar el nuevo objeto
-        await axios
-          .post(
-            "https://618194d132c9e2001780488e.mockapi.io/api/products",
-            nuevoProyecto
-          )
-          .then(this.$store.dispatch("pushProyectos", nuevoProyecto));
+        if (
+          this.proyectoNuevo.titulo !== "" &&
+          this.proyectoNuevo.genero !== "" &&
+          Number(this.proyectoNuevo.monto) > 0
+        ) {
+          //dispatch para mostrar el nuevo objeto
+          await axios
+            .post(
+              "https://618194d132c9e2001780488e.mockapi.io/api/products",
+              nuevoProyecto
+            )
+            .then(this.$store.dispatch("pushProyectos", nuevoProyecto));
 
-        alert("Proyecto creado");
-      } else {
-        alert("Complete todos los campos");
-        console.log("Fallo en el envio");
+          alert("Proyecto creado");
+        } else {
+          alert("Complete todos los campos");
+          console.log("Fallo en el envio");
+        }
+        this.limpiarCampos();
       }
-      this.limpiarCampos();
     },
 
     limpiarCampos() {
       this.proyectoNuevo.titulo = "";
       this.proyectoNuevo.genero = "";
       this.proyectoNuevo.monto = "";
-      /* document.getElementById("ingresoT").value = "";
-      document.getElementById("ingresoG").value = "";
-      document.getElementById("ingresoM").value = ""; */
     },
 
     async borrarProyecto(index) {
       const i = Number(index);
       const result = window.confirm("Desea borrar el proyecto?");
-      if (result) {
+      if (
+        this.usuarioLogeado.nombre === this.listaProyectos[i].creador &&
+        result
+      ) {
         try {
           const proyecto = await axios
             .delete(
@@ -349,6 +352,8 @@ export default {
         } catch (error) {
           console.log(error, "error al borrar");
         }
+      } else {
+        alert("Debe ser el creador del proyecto para poder borrarlo");
       }
     },
 
