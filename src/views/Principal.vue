@@ -183,6 +183,8 @@ export default {
     ...mapActions("llenarProyectos"),
     ...mapActions("borrarProyecto"),
     ...mapActions("setActualizar"),
+    ...mapActions("pushDev"),
+    ...mapActions("pushPat"),
 
     addProyect() {
       alert(this.msj);
@@ -233,10 +235,12 @@ export default {
                   const miUsuario = res.data[0];
 
                   miUsuario.proyectosDev.push(proyecto.data);
+                  
                   axios.put(
                     `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
                     miUsuario
-                  );
+                    
+                  ).then(this.$store.dispatch('pushDev', proyecto.data));
                 });
             } catch (error) {
               console.log(error, "No se encontro usuario");
@@ -274,7 +278,7 @@ export default {
                   axios.put(
                     `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
                     miUsuario
-                  );
+                  ).then(this.$store.dispatch('pushPat', proyecto.data));
                 });
             } catch (error) {
               console.log(error, "No se encontro usuario");

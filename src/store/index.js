@@ -7,9 +7,12 @@ import axios from 'axios'
 
 export default new Vuex.Store({
   state: {
+    aporte: false,
     usuarios: [],
     auth: false,
     userSeleccionado: null,
+    listaDev: [],
+    listaPat: [],
     listaUsuarios: [],
     proyectos: [],
     actualizar: false,
@@ -20,7 +23,6 @@ export default new Vuex.Store({
       disponible: true,
     }
 
-
   },
   methods: {
 
@@ -29,6 +31,9 @@ export default new Vuex.Store({
   mutations: {
     setAuth(state) {
       state.auth = !state.auth
+    },
+    setAporte(state){
+      state.aporte = !state.aporte
     },
 
     setActualizar(state){
@@ -52,6 +57,13 @@ export default new Vuex.Store({
 
     pushProyectos: (state, proyectos) =>{
       state.proyectos.push(proyectos)
+    },
+    pushDev: (state, listaDev) =>{
+      state.listaDev.push(listaDev)
+    },
+
+    pushPat: (state, listaPat) =>{
+      state.listaPat.push(listaPat)
     },
 
     borrarProyecto: (state, id) => {
@@ -78,6 +90,10 @@ export default new Vuex.Store({
     setAuthAction(context) {
       context.commit('setAuth')
     },
+    setAporte(context){
+      context.commit('setAporte')
+    },
+
     setActualizar(context){
       context.commit('setActualizar')
     },
@@ -88,6 +104,14 @@ export default new Vuex.Store({
 
     pushProyectos: ({ commit }, proyectos) => {
       commit('pushProyectos', proyectos)
+    },
+
+    pushDev : ({commit}, listaDev) =>{
+      commit('pushDev', listaDev)
+    },
+
+    pushPat : ({commit}, listaPat) =>{
+      commit('pushPat', listaPat)
     },
 
     borrarProyecto: ({ commit }, id) =>{
@@ -125,7 +149,16 @@ export default new Vuex.Store({
     },
     getActualizar:(state)=>{
       return state.actualizar
-    }
+    },
+    getAporte:(state)=>{
+      return state.aporte
+    },
+    getListaDev:(state) =>{
+      return state.listaDev
+    },
+    getListaPat:(state) =>{
+      return state.listaPat
+    },
   },
 
 })

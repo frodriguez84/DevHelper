@@ -18,7 +18,6 @@
             class="fadeIn second"
             name="user"
             placeholder="Usuario"
-           
           />
           <input
             v-model="clave"
@@ -27,7 +26,6 @@
             class="fadeIn third"
             name="password"
             placeholder="Password"
-            
           />
           <input
             type="button"
@@ -54,6 +52,8 @@ export default {
 
   computed: {
     ...mapGetters({ usuarios: "getUsuarios" }),
+    ...mapGetters({ listaDev: "getListaDev" }),
+    ...mapGetters({ listaPat: "getListaPat" }),
   },
 
   data() {
@@ -71,6 +71,8 @@ export default {
       this.$router.push("/principal");
     },
 
+    
+
     validation(nombre, clave) {
       const u = this.usuarios.find(
         (usuario) => usuario.nombre == nombre && usuario.password == clave
@@ -83,7 +85,18 @@ export default {
         alert("Usuario o clave incorrecta");
       }
       this.$store.state.userSeleccionado = u;
+      this.llenarListas(u)
     },
+
+    llenarListas(usuarioLogeado) {
+      usuarioLogeado.proyectosDev.forEach((element) => {
+        this.listaDev.push(element);
+      });
+      usuarioLogeado.proyectosPat.forEach((element) => {
+        this.listaPat.push(element);
+      });
+    },
+
   },
 };
 </script>

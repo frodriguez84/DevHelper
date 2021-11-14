@@ -5,7 +5,7 @@
     </h1>
     <div>
       <h4>Proyectos colaborando como DEV</h4>
-      <!-- <h1>{{usuarioLogeado.proyectosDev[0]}}</h1> -->
+      <!-- <h1>{{listaDev}}</h1> -->
     </div>
 
     <table class="table table-success">
@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="p in usuarioLogeado.proyectosDev" :key="p.id">
+        <tr v-for="p in listaDev" :key="p.id">
           <td>
             <span>{{ p.titulo }}</span>
           </td>
@@ -63,7 +63,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="p in usuarioLogeado.proyectosPat" :key="p.id">
+        <tr v-for="p in listaPat" :key="p.id">
           <td>
             <span>{{ p.titulo }}</span>
           </td>
@@ -77,7 +77,7 @@
             <span>{{ p.creador }}</span>
           </td>
           <td>
-            <div v-if="!aporto">
+            <div v-if="!p.aportable">
               <input v-model="p.aporte" type="number" />
               <button @click="aportar(p.id, p.aporte)" class="btn btn-warning">
                 Aportar
@@ -106,7 +106,7 @@
       </tbody>
     </table>
     <h5 v-if="usuarioLogeado.proyectosPat.length > 0" class="text-danger">
-      Nota: Complete todos los aportes y clikee en "Aportar"
+      Nota: Recuerde que solo puede aportar a un proyecto solo una vez
     </h5>
     <hr />
     <div>
@@ -130,6 +130,9 @@ export default {
     ...mapGetters({ listaProyectos: "getProyectos" }),
     ...mapGetters({ usuarios: "getUsuarios" }),
     ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
+    ...mapGetters({ aporte: "getAporte" }),
+    ...mapGetters({ listaDev: "getListaDev" }),
+    ...mapGetters({ listaPat: "getListaPat" }),
   },
 
   data() {
@@ -137,14 +140,13 @@ export default {
       aporto: false,
     };
   },
-
-  beforeMount() {
-    this.cargarListaDev();
-    this.cargarListaPat();
-  },
+ 
 
   methods: {
+    ...mapActions("setAporte"),
     ...mapActions("pushUsuarios"),
+    ...mapActions("pushDev"),
+    ...mapActions("pushPat"),
 
     principal() {
       this.$router.push("/principal");
@@ -162,6 +164,8 @@ export default {
       const borrado = miUsuario.proyectosDev.findIndex(
         (element) => element.id == i
       );
+
+      this.listaDev.splice(borrado, 1);
       miUsuario.proyectosDev.splice(borrado, 1);
 
       try {
@@ -181,6 +185,7 @@ export default {
       const borrado = miUsuario.proyectosPat.findIndex(
         (element) => element.id == i
       );
+      this.listaPat.splice(borrado, 1);
       miUsuario.proyectosPat.splice(borrado, 1);
 
       try {
@@ -207,8 +212,8 @@ export default {
       if (result) {
         if (aporte > 0 && aporte <= miUsuario.proyectosPat[proyectoId].monto) {
           miUsuario.proyectosPat[proyectoId].monto -= aporte;
-
-          this.aporto = !this.aporto;
+          miUsuario.proyectosPat[proyectoId].aportable = !miUsuario.proyectosPat[proyectoId].aportable
+          
           alert("Su aporte ha sido guardado");
         } else {
           alert(
@@ -217,12 +222,8 @@ export default {
         }
       }
     },
-    cargarListaDev() {
-      return this.usuarioLogeado.proyectosDev;
-    },
-    cargarListaPat() {
-      return this.usuarioLogeado.proyectosPat;
-    },
+
+    
   },
 };
 </script>
