@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ titulo }}</h1>
+    <h1 class="tituloEstilo">{{ titulo }}</h1>
     <div>
       <h3>Proyecto mas caro en desarrollar</h3>
     </div>
@@ -14,7 +14,7 @@
           <th scope="col">Creador</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table bg-success" style="color: white">
         <tr>
           <td>
             <span>{{ proyectoMax.titulo }}</span>
@@ -107,7 +107,6 @@ export default {
       gRpg: {texto:"Rpg", cant: 0},
       gIndie: {texto:"Indie", cant: 0},
       gDeporte: {texto:"Deporte", cant: 0},
-      
       gMax: {texto:"", cant: 0},
     };
   },
@@ -238,6 +237,14 @@ export default {
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   margin: 0 auto; /* Added */
   float: none; /* Added */
-  margin-bottom: 10px; /* Added */
+  margin-bottom: 8px; /* Added */
+  margin-top: 8px
+}
+.tituloEstilo{
+  background-color: rgba(12, 63, 35, 0.76);
+  color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+
 }
 </style>

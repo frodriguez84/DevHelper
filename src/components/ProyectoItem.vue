@@ -4,7 +4,8 @@
       <div class="card-header">
         <img class="card-img-top" src="" alt="">
         <h5 class="card-title">Titulo: {{ proyecto.titulo }}</h5>
-        <h6 class="card-subtitule">Disponible: {{ proyecto.disponible }}</h6>
+        <h6 class="card-subtitule" v-if="proyecto.disponible">Disponible: Si</h6>
+        <h6 class="card-subtitule" v-else>Disponible: No</h6>
       </div>
       <div class="card-body">
         <p class="card-text">Genero: {{ proyecto.genero }}</p>
@@ -39,6 +40,13 @@ export default {
 }
 .card:hover{
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+}
+.card-header{
+  background-color: rgb(80, 80, 80);
+  color: whitesmoke;
+}
+.card-body{
+  background-color: rgb(209, 209, 209);
 }
 </style>
 

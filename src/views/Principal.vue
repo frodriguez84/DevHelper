@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h1>{{ titulo }}</h1>
+      <h1 class="tituloEstilo">{{ titulo }}</h1>
 
       <div class="d-flex">
         <input
@@ -425,6 +425,14 @@ export default {
   text-decoration: line-through;
 }
 .form-control {
+  
   box-shadow: 0 30px 50px 0 rgba(151, 24, 24, 0.562);
 }
+.tituloEstilo{
+  background-color: darkslategray;
+  color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+}
+
 </style>

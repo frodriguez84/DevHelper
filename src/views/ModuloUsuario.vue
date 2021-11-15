@@ -1,14 +1,14 @@
 <template>
   <div class="container">
-    <h1 class="text-warning">
-      Modulo del usuario: {{ usuarioLogeado.nombre }}
-    </h1>
+    <div class="tituloEstilo">
+    <h1 >Modulo del usuario: {{ usuarioLogeado.nombre }}</h1>
+    </div>
     <div>
-      <h4>Proyectos colaborando como DEV</h4>
-      <!-- <h1>{{listaDev}}</h1> -->
+      <h4 >Proyectos colaborando como DEV</h4>
+      
     </div>
 
-    <table class="table table-success">
+    <table class="table table-dark" >
       <thead>
         <tr>
           <th scope="col">Titulo</th>
@@ -19,7 +19,7 @@
           <th scope="col">Ver</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table table-success">
         <tr v-for="p in listaDev" :key="p.id">
           <td>
             <span>{{ p.titulo }}</span>
@@ -49,7 +49,7 @@
     <div>
       <h4>Proyectos colaborando como PATROCINADOR</h4>
     </div>
-    <table class="table table-secondary">
+    <table class="table table-dark">
       <thead>
         <tr>
           <th scope="col">Titulo</th>
@@ -62,7 +62,7 @@
           <th scope="col">Ver</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="table table-secondary">
         <tr v-for="p in listaPat" :key="p.id">
           <td>
             <span>{{ p.titulo }}</span>
@@ -77,7 +77,7 @@
             <span>{{ p.creador }}</span>
           </td>
           <td>
-            <div v-if="!p.aportable">
+            <div v-if="p.aportable == true">
               <input v-model="p.aporte" type="number" />
               <button @click="aportar(p.id, p.aporte)" class="btn btn-warning">
                 Aportar
@@ -227,4 +227,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.tituloEstilo{
+  background-color: rgba(25, 51, 105, 0.849);
+  color: white;
+  border-radius: 15px;
+  margin-top: 5px;
+
+}
+</style>
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="container"  >
-    <h1>{{ titulo }}</h1>
+  <div class="container">
+    <h1 class="tituloEstilo">{{ titulo }}</h1>
   
-<div class="centrado">
+<div>
       <slider class="carousel" animation="fade" width="500px" height="200px" >
       <slider-item v-for="(i, index) in listaProyectos" :key="index">
         <h3 class="text-success">{{ i.titulo }}</h3>
@@ -91,11 +91,16 @@ body {
   border-radius: 20px;
 }
 .container{
-  border: solid green 1px;
+  /* border: solid green 1px; */
   margin-bottom: 100px;
   
 }
-.centrado{
-  border: solid blue 1px;
+.tituloEstilo{
+  background-color: rgb(241, 168, 32);
+  color: black;
+  border-radius: 15px;
+  margin-top: 5px;
+
 }
+
 </style>
