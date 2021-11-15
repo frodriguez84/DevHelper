@@ -60,7 +60,7 @@
       </div>
       <div class="card container row mx-auto">
         <div class="card-header">
-          <h5>Genero mas creado</h5>
+          <h5>De los juegos publicados, el genero mas elegido es:</h5>
           <h5 class="text-primary">{{ gMax.texto }}</h5>
         </div>
       </div>
@@ -216,17 +216,14 @@ export default {
       this.gDeporte.cant, this.gRol.cant, this.gRpg.cant, this.gIndie.cant)
 
       generos.forEach(element => {
-        
           if(element.cant === this.gMax.cant){
             this.gMax.texto = element.texto
-
           }
           
       },
 
       );
-      
-      
+       
     },
   },
 };
