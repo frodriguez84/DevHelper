@@ -58,6 +58,12 @@
           <h5 class="text-warning">${{ promMontoProyectos }}</h5>
         </div>
       </div>
+      <div class="card container row mx-auto">
+        <div class="card-header">
+          <h5>Genero mas creado</h5>
+          <h5 class="text-primary">{{ gMax.texto }}</h5>
+        </div>
+      </div>
     </div>
     <br />
     <div>
@@ -94,6 +100,15 @@ export default {
       promPorUsuario: 0,
       promMontoProyectos: 0,
       proyectosUsuario: 0,
+      gAccion: {texto:"Accion", cant: 0},
+      gEstrategia: {texto:"Estrategia", cant: 0},
+      gAventura: {texto:"Aventura", cant: 0},
+      gRol: {texto:"Rol", cant: 0},
+      gRpg: {texto:"Rpg", cant: 0},
+      gIndie: {texto:"Indie", cant: 0},
+      gDeporte: {texto:"Deporte", cant: 0},
+      
+      gMax: {texto:"", cant: 0},
     };
   },
 
@@ -105,6 +120,7 @@ export default {
     this.promedioProPorUsuario();
     this.promedioMonto();
     this.proyectosDelUsuario();
+    this.generoMax();
   },
 
   methods: {
@@ -117,7 +133,6 @@ export default {
     moduloUsuario() {
       this.$router.push("/modulo_usuario");
     },
-
 
     proyectoMasCostoso() {
       let max = 0;
@@ -181,6 +196,38 @@ export default {
           this.proyectosUsuario++;
         }
       });
+    },
+    generoMax() {
+      
+      this.listaProyectos.forEach((p) => {
+        switch (p.genero) {
+          case "Accion": this.gAccion.cant++; break;
+          case "Estrategia": this.gEstrategia.cant++; break;
+          case "Aventura": this.gAventura.cant++; break;
+          case "Deporte": this.gDeporte.cant++; break;
+          case "Rol": this.gRol.cant++; break;
+          case "Rpg": this.gRpg.cant++; break;
+          case "Indie": this.gIndie.cant++; break;
+          default: break;
+        }   
+      },
+    );
+      let generos = [this.gAventura, this.gAccion, this.gEstrategia, this.gDeporte, this.gRol, this.gRpg, this.gIndie]
+      this.gMax.cant = Math.max(this.gAccion.cant, this.gEstrategia.cant, this.gAventura.cant,
+      this.gDeporte.cant, this.gRol.cant, this.gRpg.cant, this.gIndie.cant)
+
+      generos.forEach(element => {
+        
+          if(element.cant === this.gMax.cant){
+            this.gMax.texto = element.texto
+
+          }
+          
+      },
+
+      );
+      
+      
     },
   },
 };

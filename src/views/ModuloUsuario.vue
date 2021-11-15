@@ -40,7 +40,7 @@
             </div>
           </td>
           <td>
-            <button class="btn btn-warning" @click="producto">Ver</button>
+            <button class="btn btn-outline-primary btn-block" @click="producto">Ver</button>
           </td>
         </tr>
       </tbody>
@@ -213,7 +213,7 @@ export default {
         if (aporte > 0 && aporte <= miUsuario.proyectosPat[proyectoId].monto) {
           miUsuario.proyectosPat[proyectoId].monto -= aporte;
           miUsuario.proyectosPat[proyectoId].aportable = !miUsuario.proyectosPat[proyectoId].aportable
-          
+
           alert("Su aporte ha sido guardado");
         } else {
           alert(
