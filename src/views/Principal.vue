@@ -86,7 +86,7 @@
               <span>{{ p.creador }}</span>
             </td>
             <td>
-              <div class="text-center" @click="editarProyecto(p.id)">
+              <div class="text-center" @click="editarProyecto(index)">
                 <button class="btn btn-warning">Editar</button>
                 <span class="fa fa-pen"></span>
               </div>
@@ -362,7 +362,7 @@ export default {
     },
 
     editarProyecto(index) {
-      const i = Number(index - 1);
+      const i = Number(index);
       if (this.usuarioLogeado.nombre === this.listaProyectos[i].creador) {
         this.$store.dispatch("setActualizar");
 
