@@ -120,7 +120,7 @@
             <td>
               <div>
                 <button
-                  @click="producto"
+                  @click="producto(p.id)"
                   class="btn btn-outline-primary btn-block"
                 >
                   Ver
@@ -161,6 +161,7 @@ export default {
     ...mapGetters({ usuarios: "getUsuarios" }),
     ...mapGetters({ usuarioLogeado: "getUsuarioLogeado" }),
     ...mapGetters({ actualizar: "getActualizar" }),
+    // ...mapGetters({tituloActual: "getTituloActual"})
   },
   data() {
     return {
@@ -185,6 +186,7 @@ export default {
     ...mapActions("setActualizar"),
     ...mapActions("pushDev"),
     ...mapActions("pushPat"),
+    ...mapActions("setTitulo"),
 
     addProyect() {
       alert(this.msj);
@@ -208,8 +210,21 @@ export default {
     buscar() {
       this.$router.push("/tienda");
     },
-    producto() {
-      this.$router.push("/producto");
+    async producto(index) {
+      const i = Number(index);
+
+      try {
+        const proyecto = await axios.get(
+          `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}` );
+          const pro = proyecto.data
+          this.$store.dispatch("setTitulo", pro);
+          console.log('entre' + proyecto)
+         this.$router.push("/producto");
+        
+      } catch (error) {
+        console.log("Error", error)
+      }
+
     },
     moduloUsuario() {
       this.$router.push("/modulo_usuario");
@@ -235,12 +250,13 @@ export default {
                   const miUsuario = res.data[0];
 
                   miUsuario.proyectosDev.push(proyecto.data);
-                  
-                  axios.put(
-                    `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
-                    miUsuario
-                    
-                  ).then(this.$store.dispatch('pushDev', proyecto.data));
+
+                  axios
+                    .put(
+                      `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
+                      miUsuario
+                    )
+                    .then(this.$store.dispatch("pushDev", proyecto.data));
                 });
             } catch (error) {
               console.log(error, "No se encontro usuario");
@@ -275,10 +291,15 @@ export default {
                 .then((res) => {
                   const miUsuario = res.data[0];
                   miUsuario.proyectosPat.push(proyecto.data);
-                  axios.put(
-                    `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
-                    miUsuario
-                  ).then(this.$store.dispatch('pushPat', proyecto.data));
+                  axios
+                    .put(
+                      `https://6180891b8bfae60017adfb16.mockapi.io/api/users/${idUsuario}`,
+                      miUsuario
+                    )
+                    .then(
+                      this.$store.dispatch("pushPat", proyecto.data),
+                      this.usuarioLogeado.proyectosPat.push(proyecto.data)
+                    );
                 });
             } catch (error) {
               console.log(error, "No se encontro usuario");
@@ -340,24 +361,22 @@ export default {
     async borrarProyecto(index) {
       const i = Number(index);
       const result = window.confirm("Desea borrar el proyecto?");
-      if (
-        this.usuarioLogeado.nombre === this.listaProyectos[i].creador &&
-        result
-      ) {
-        try {
-          const proyecto = await axios
-            .delete(
-              `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
-            )
-            .then(this.$store.dispatch("borrarProyecto", i, 1));
+      if (result) {
+        if (this.usuarioLogeado.nombre === this.listaProyectos[i].creador) {
+          try {
+            const proyecto = await axios
+              .delete(
+                `https://618194d132c9e2001780488e.mockapi.io/api/products/${i}`
+              )
+              .then(this.$store.dispatch("borrarProyecto", i, 1));
 
-          alert(`El proyecto ${proyecto.data.titulo} fue borrado`);
-          //dispatch con splice
-        } catch (error) {
-          console.log(error, "error al borrar");
+            alert(`El proyecto ${proyecto.data.titulo} fue borrado`);
+          } catch (error) {
+            console.log(error, "error al borrar");
+          }
+        } else {
+          alert("Debe ser el creador del proyecto para poder borrarlo");
         }
-      } else {
-        alert("Debe ser el creador del proyecto para poder borrarlo");
       }
     },
 
@@ -425,14 +444,12 @@ export default {
   text-decoration: line-through;
 }
 .form-control {
-  
   box-shadow: 0 30px 50px 0 rgba(151, 24, 24, 0.562);
 }
-.tituloEstilo{
+.tituloEstilo {
   background-color: darkslategray;
   color: white;
   border-radius: 15px;
   margin-top: 5px;
 }
-
 </style>

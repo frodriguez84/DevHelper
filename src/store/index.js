@@ -8,6 +8,7 @@ import axios from 'axios'
 export default new Vuex.Store({
   state: {
     aporte: false,
+    tituloActual: {},
     usuarios: [],
     auth: false,
     userSeleccionado: null,
@@ -31,6 +32,10 @@ export default new Vuex.Store({
   mutations: {
     setAuth(state) {
       state.auth = !state.auth
+    },
+
+    setTitulo(state, proyecto){
+      state.tituloActual = proyecto
     },
     setAporte(state){
       state.aporte = !state.aporte
@@ -83,6 +88,9 @@ export default new Vuex.Store({
   },
   actions: {
 
+    setTitulo: ({commit}, proyecto ) =>{
+      commit("setTitulo", proyecto)
+    },
     /* agregarUsuario: ({ commit }, usuario) => {
       commit("agregarUsuario", usuario);
     }, */
@@ -130,6 +138,10 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+
+    getTituloActual(state){
+      return state.tituloActual
+    },
     
     filteredProyects(state) {
       if (state.filter.query.length > 2) {

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ titulo }} {{ nombreJuego }}</h1>
+    <h1>{{ titulo }} {{ tituloActual.titulo }}</h1>
 
     <div>
       <b-card
@@ -11,7 +11,7 @@
         tag="article"
         style="max-width: 30rem"
         class="mb-2"
-        >{{ nombreJuego }}
+        >{{ tituloActual.titulo }}
         <b-card-text>
          
         <div v-if="!desc">
@@ -74,9 +74,13 @@
 
 
 <script>
+import {mapGetters} from "vuex"
 export default {
   name: "Producto",
   components: {},
+  computed: {
+    ...mapGetters({tituloActual: "getTituloActual"})
+  },
 
   data() {
     return {

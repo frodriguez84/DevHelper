@@ -211,7 +211,9 @@ export default {
         }   
       },
     );
-      let generos = [this.gAventura, this.gAccion, this.gEstrategia, this.gDeporte, this.gRol, this.gRpg, this.gIndie]
+      let generos = [this.gAventura, this.gAccion, this.gEstrategia, this.gDeporte, 
+      this.gRol, this.gRpg, this.gIndie]
+      
       this.gMax.cant = Math.max(this.gAccion.cant, this.gEstrategia.cant, this.gAventura.cant,
       this.gDeporte.cant, this.gRol.cant, this.gRpg.cant, this.gIndie.cant)
 
